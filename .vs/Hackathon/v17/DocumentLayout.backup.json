@@ -1,0 +1,649 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\ki8\\PRN232\\Hackathon\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\dependencyinjection\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\dependencyinjection\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\approveaccount\\approveaccounthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\approveaccount\\approveaccounthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\exceptions\\badrequestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\exceptions\\badrequestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\exceptions\\unauthorizedexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\exceptions\\unauthorizedexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D373D5CC-B6D0-4819-8AFB-FBE4EF9F0917}|Infrastructure\\Infrastructure.csproj|e:\\ki8\\prn232\\hackathon\\infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D373D5CC-B6D0-4819-8AFB-FBE4EF9F0917}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\exceptions\\forbiddenexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\exceptions\\forbiddenexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\common\\constants\\roleconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\common\\constants\\roleconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\common\\pagination\\paginationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\common\\pagination\\paginationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\common\\pagination\\paginationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\common\\pagination\\paginationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\common\\models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\common\\models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\common\\models\\errorresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\common\\models\\errorresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\security\\ipasswordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\security\\ipasswordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\security\\ijwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\security\\ijwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\services\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\services\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\services\\icsvexportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\services\\icsvexportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\services\\igithubservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\services\\igithubservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\repositories\\isubmissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\repositories\\isubmissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\repositories\\iteamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\repositories\\iteamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\interfaces\\repositories\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\interfaces\\repositories\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\approveaccount\\approveaccountresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\approveaccount\\approveaccountresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\approveaccount\\approveaccountrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\approveaccount\\approveaccountrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\login\\loginhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\loginhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\login\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\login\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\login\\loginvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\loginvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\register\\registerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\register\\registerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\register\\registerresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\register\\registerresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\register\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\register\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\features\\auth\\register\\registervalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\register\\registervalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D0F1233-0D33-41C3-A701-2E0FD6E38EFC}|Domain\\Domain.csproj|e:\\ki8\\prn232\\hackathon\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D0F1233-0D33-41C3-A701-2E0FD6E38EFC}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D0F1233-0D33-41C3-A701-2E0FD6E38EFC}|Domain\\Domain.csproj|e:\\ki8\\prn232\\hackathon\\domain\\enums\\usertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D0F1233-0D33-41C3-A701-2E0FD6E38EFC}|Domain\\Domain.csproj|solutionrelative:domain\\enums\\usertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D0F1233-0D33-41C3-A701-2E0FD6E38EFC}|Domain\\Domain.csproj|e:\\ki8\\prn232\\hackathon\\domain\\domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7D0F1233-0D33-41C3-A701-2E0FD6E38EFC}|Domain\\Domain.csproj|solutionrelative:domain\\domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59C4FC80-A6FB-488E-9595-89FE40868EFF}|WebAPI\\WebAPI.csproj|e:\\ki8\\prn232\\hackathon\\webapi\\webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{59C4FC80-A6FB-488E-9595-89FE40868EFF}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|e:\\ki8\\prn232\\hackathon\\application\\application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{29CE029D-F8CD-4E6C-8B2B-4C4E6B2A3595}|Application\\Application.csproj|solutionrelative:application\\application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Infrastructure",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Infrastructure\\Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Infrastructure\\Infrastructure.csproj",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Infrastructure\\Infrastructure.csproj*",
+              "RelativeToolTip": "Infrastructure\\Infrastructure.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-26T07:30:43.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ServiceRegistration.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\DependencyInjection\\ServiceRegistration.cs",
+              "RelativeDocumentMoniker": "Application\\DependencyInjection\\ServiceRegistration.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\DependencyInjection\\ServiceRegistration.cs",
+              "RelativeToolTip": "Application\\DependencyInjection\\ServiceRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:29:07.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UnauthorizedException.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\UnauthorizedException.cs",
+              "RelativeDocumentMoniker": "Application\\Exceptions\\UnauthorizedException.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\UnauthorizedException.cs",
+              "RelativeToolTip": "Application\\Exceptions\\UnauthorizedException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:28:30.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BadRequestException.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\BadRequestException.cs",
+              "RelativeDocumentMoniker": "Application\\Exceptions\\BadRequestException.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\BadRequestException.cs",
+              "RelativeToolTip": "Application\\Exceptions\\BadRequestException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:28:20.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "Application\\Exceptions\\NotFoundException.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "Application\\Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:28:10.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApproveAccountHandler.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\ApproveAccount\\ApproveAccountHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\ApproveAccount\\ApproveAccountHandler.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\ApproveAccount\\ApproveAccountHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\ApproveAccount\\ApproveAccountHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:20:23.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ForbiddenException.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\ForbiddenException.cs",
+              "RelativeDocumentMoniker": "Application\\Exceptions\\ForbiddenException.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Exceptions\\ForbiddenException.cs",
+              "RelativeToolTip": "Application\\Exceptions\\ForbiddenException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:28:37.266Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RoleConstants.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Constants\\RoleConstants.cs",
+              "RelativeDocumentMoniker": "Application\\Common\\Constants\\RoleConstants.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Constants\\RoleConstants.cs",
+              "RelativeToolTip": "Application\\Common\\Constants\\RoleConstants.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:27:04.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PaginationResponse.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Pagination\\PaginationResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Common\\Pagination\\PaginationResponse.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Pagination\\PaginationResponse.cs",
+              "RelativeToolTip": "Application\\Common\\Pagination\\PaginationResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:25:42.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PaginationRequest.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Pagination\\PaginationRequest.cs",
+              "RelativeDocumentMoniker": "Application\\Common\\Pagination\\PaginationRequest.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Pagination\\PaginationRequest.cs",
+              "RelativeToolTip": "Application\\Common\\Pagination\\PaginationRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:25:36.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ErrorResponse.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Models\\ErrorResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Common\\Models\\ErrorResponse.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Models\\ErrorResponse.cs",
+              "RelativeToolTip": "Application\\Common\\Models\\ErrorResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:25:05.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Models\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Common\\Models\\ApiResponse.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Common\\Models\\ApiResponse.cs",
+              "RelativeToolTip": "Application\\Common\\Models\\ApiResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:24:53.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IPasswordHasher.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Security\\IPasswordHasher.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Security\\IPasswordHasher.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Security\\IPasswordHasher.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Security\\IPasswordHasher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:23:24.728Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IJwtService.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Security\\IJwtService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Security\\IJwtService.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Security\\IJwtService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Security\\IJwtService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:23:16.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IFileStorageService.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\IFileStorageService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Services\\IFileStorageService.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\IFileStorageService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Services\\IFileStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:23:06.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ICsvExportService.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\ICsvExportService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Services\\ICsvExportService.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\ICsvExportService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Services\\ICsvExportService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:22:58.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IGithubService.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\IGithubService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Services\\IGithubService.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\IGithubService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Services\\IGithubService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:22:47.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\IEmailService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Services\\IEmailService.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Services\\IEmailService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Services\\IEmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:22:39.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ISubmissionRepository.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\ISubmissionRepository.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Repositories\\ISubmissionRepository.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\ISubmissionRepository.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Repositories\\ISubmissionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:22:08.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ITeamRepository.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\ITeamRepository.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Repositories\\ITeamRepository.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\ITeamRepository.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Repositories\\ITeamRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:22:00.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Repositories\\IUserRepository.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:21:50.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IEventRepository.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\IEventRepository.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\Repositories\\IEventRepository.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Interfaces\\Repositories\\IEventRepository.cs",
+              "RelativeToolTip": "Application\\Interfaces\\Repositories\\IEventRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:21:39.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ApproveAccountResponse.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\ApproveAccount\\ApproveAccountResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\ApproveAccount\\ApproveAccountResponse.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\ApproveAccount\\ApproveAccountResponse.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\ApproveAccount\\ApproveAccountResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:20:33.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ApproveAccountRequest.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\ApproveAccount\\ApproveAccountRequest.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\ApproveAccount\\ApproveAccountRequest.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\ApproveAccount\\ApproveAccountRequest.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\ApproveAccount\\ApproveAccountRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:20:13.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "LoginValidator.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginValidator.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginValidator.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginValidator.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:19:24.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "LoginHandler.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginHandler.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:19:15.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "LoginResponse.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginResponse.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginResponse.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginResponse.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:19:07.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginRequest.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Login\\LoginRequest.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:18:58.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "RegisterValidator.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterValidator.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Register\\RegisterValidator.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterValidator.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Register\\RegisterValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:17:36.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "RegisterHandler.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Register\\RegisterHandler.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Register\\RegisterHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:17:28.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "RegisterResponse.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Register\\RegisterResponse.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterResponse.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Register\\RegisterResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:17:19.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "RegisterRequest.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterRequest.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Register\\RegisterRequest.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Features\\Auth\\Register\\RegisterRequest.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Register\\RegisterRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:17:11.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "UserType.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Enums\\UserType.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\UserType.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Enums\\UserType.cs",
+              "RelativeToolTip": "Domain\\Enums\\UserType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:13:48.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Entities\\User.cs*",
+              "RelativeToolTip": "Domain\\Entities\\User.cs*",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T07:13:04.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Domain",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Domain.csproj",
+              "RelativeDocumentMoniker": "Domain\\Domain.csproj",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Domain.csproj*",
+              "RelativeToolTip": "Domain\\Domain.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-26T07:12:24.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "WebAPI",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\WebAPI\\WebAPI.csproj",
+              "RelativeDocumentMoniker": "WebAPI\\WebAPI.csproj",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\WebAPI\\WebAPI.csproj*",
+              "RelativeToolTip": "WebAPI\\WebAPI.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-26T07:07:29.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Application",
+              "DocumentMoniker": "E:\\ki8\\PRN232\\Hackathon\\Application\\Application.csproj",
+              "RelativeDocumentMoniker": "Application\\Application.csproj",
+              "ToolTip": "E:\\ki8\\PRN232\\Hackathon\\Application\\Application.csproj*",
+              "RelativeToolTip": "Application\\Application.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-26T07:07:01.171Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

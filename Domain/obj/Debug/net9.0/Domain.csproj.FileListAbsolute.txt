@@ -1,0 +1,11 @@
+E:\ki8\PRN232\Hackathon\Domain\bin\Debug\net9.0\Domain.deps.json
+E:\ki8\PRN232\Hackathon\Domain\bin\Debug\net9.0\Domain.dll
+E:\ki8\PRN232\Hackathon\Domain\bin\Debug\net9.0\Domain.pdb
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.AssemblyInfoInputs.cache
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.AssemblyInfo.cs
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.csproj.CoreCompileInputs.cache
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.dll
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\refint\Domain.dll
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.pdb
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\ref\Domain.dll

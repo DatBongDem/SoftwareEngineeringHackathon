@@ -1,0 +1,5 @@
+E:\ki8\PRN232\Hackathon\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.AssemblyReference.cache
+E:\ki8\PRN232\Hackathon\Infrastructure\obj\Debug\net9.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\ki8\PRN232\Hackathon\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfoInputs.cache
+E:\ki8\PRN232\Hackathon\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfo.cs
+E:\ki8\PRN232\Hackathon\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.CoreCompileInputs.cache
