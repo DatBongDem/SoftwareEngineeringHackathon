@@ -1,4 +1,5 @@
-﻿using System;
+using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,11 @@ namespace Application.Features.Auth.Register
 {
     public class RegisterRequest
     {
-        public string FullName { get; set; }
+        public string FullName { get; set; } = default!;
 
-        public string Email { get; set; }
+        public string Email { get; set; } = default!;
 
-        public string Password { get; set; }
+        public string Password { get; set; } = default!;
 
         public UserType UserType { get; set; }
 
