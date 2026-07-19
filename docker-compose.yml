@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  seal-hackathon-api:
+    image: seal-hackathon-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seal-hackathon-api
+    ports:
+      - "5284:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=${MONGODB_CONNECTION_STRING:-mongodb+srv://se181844nguyentiendat_db_user:Bongdemno.1@cluster0.erjjjy2.mongodb.net/?retryWrites=true&w=majority}
+      - MongoDbSettings__DatabaseName=SEALHackathonDb
+      - JwtSettings__Secret=SEAL_Hackathon_Super_Secret_Key_2026_PRN232_FPT_University
+      - JwtSettings__Issuer=SEALHackathonAPI
+      - JwtSettings__Audience=SEALHackathonClient
+    restart: always
