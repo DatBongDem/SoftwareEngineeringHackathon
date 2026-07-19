@@ -9,3 +9,5 @@ E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.dll
 E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\refint\Domain.dll
 E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.pdb
 E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\ref\Domain.dll
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.sourcelink.json
+E:\ki8\PRN232\Hackathon\Domain\obj\Debug\net9.0\Domain.csproj.AssemblyReference.cache

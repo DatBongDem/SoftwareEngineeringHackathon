@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sbzXICzbiKc=",
+  "dgSpecHash": "+09PNewtsMw=",
   "success": true,
   "projectFilePath": "E:\\ki8\\PRN232\\Hackathon\\Domain\\Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Nguyen Tien Dat\\.nuget\\packages\\mongodb.bson\\3.10.0\\mongodb.bson.3.10.0.nupkg.sha512",
+    "C:\\Users\\Nguyen Tien Dat\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\Nguyen Tien Dat\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

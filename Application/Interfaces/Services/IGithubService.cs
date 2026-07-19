@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Domain.Entities;
 using System.Threading.Tasks;
 
 namespace Application.Interfaces.Services
 {
-    internal class IGithubService
+    public interface IGithubService
     {
+        Task<GithubRepoMetadata?> FetchMetadataAsync(string repoUrl);
     }
 }

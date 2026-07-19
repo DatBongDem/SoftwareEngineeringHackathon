@@ -1,12 +1,16 @@
-﻿using System;
+using Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Interfaces.Repositories
 {
-    internal class ITeamRepository
+    public interface ITeamRepository
     {
+        Task<Team?> GetByIdAsync(string id);
+        Task<Team?> GetUserTeamInEventAsync(string userId, string eventId);
+        Task<List<Team>> GetTeamsByEventIdAsync(string eventId);
+        Task<List<Team>> GetTeamsByTrackIdAsync(string trackId);
+        Task CreateAsync(Team team);
+        Task UpdateAsync(Team team);
     }
 }

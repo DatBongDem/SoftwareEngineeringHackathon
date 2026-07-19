@@ -1,12 +1,16 @@
-﻿using System;
+using Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Interfaces.Repositories
 {
-    internal class ISubmissionRepository
+    public interface ISubmissionRepository
     {
+        Task<Submission?> GetByIdAsync(string id);
+        Task<Submission?> GetTeamSubmissionInRoundAsync(string teamId, string roundId);
+        Task<List<Submission>> GetSubmissionsByRoundIdAsync(string roundId);
+        Task<List<Submission>> GetSubmissionsByEventIdAsync(string eventId);
+        Task CreateAsync(Submission submission);
+        Task UpdateAsync(Submission submission);
     }
 }

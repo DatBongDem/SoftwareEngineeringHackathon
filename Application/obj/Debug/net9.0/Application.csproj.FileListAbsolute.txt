@@ -3,3 +3,14 @@ E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.GeneratedMSBuil
 E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.AssemblyInfoInputs.cache
 E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.AssemblyInfo.cs
 E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.csproj.CoreCompileInputs.cache
+E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.sourcelink.json
+E:\ki8\PRN232\Hackathon\Application\bin\Debug\net9.0\Application.deps.json
+E:\ki8\PRN232\Hackathon\Application\bin\Debug\net9.0\Application.dll
+E:\ki8\PRN232\Hackathon\Application\bin\Debug\net9.0\Application.pdb
+E:\ki8\PRN232\Hackathon\Application\bin\Debug\net9.0\Domain.dll
+E:\ki8\PRN232\Hackathon\Application\bin\Debug\net9.0\Domain.pdb
+E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Applicat.44B5EDA2.Up2Date
+E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.dll
+E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\refint\Application.dll
+E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\Application.pdb
+E:\ki8\PRN232\Hackathon\Application\obj\Debug\net9.0\ref\Application.dll
