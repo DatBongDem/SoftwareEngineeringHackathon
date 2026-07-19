@@ -1,3 +1,9 @@
+## Ignore sensitive configuration files containing database passwords & secrets
+appsettings.json
+appsettings.Development.json
+appsettings.*.json
+!appsettings.example.json
+
 ## Ignore Visual Studio & .NET build output
 bin/
 obj/
@@ -6,4 +12,3 @@ obj/
 *.userosscache
 *.sln.docstates
 .vscode/
-appsettings.Development.json

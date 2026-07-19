@@ -18,7 +18,7 @@ namespace Infrastructure.DependencyInjection
             services.Configure<MongoDbSettings>(options =>
             {
                 options.ConnectionString = configuration["MongoDbSettings:ConnectionString"] 
-                    ?? "mongodb+srv://se181844nguyentiendat_db_user:Bomgdemno.1@cluster0.erjjjy2.mongodb.net/?appName=Cluster0";
+                    ?? "mongodb+srv://se181844nguyentiendat_db_user:Bongdemno.1@cluster0.erjjjy2.mongodb.net/?retryWrites=true&w=majority";
                 options.DatabaseName = configuration["MongoDbSettings:DatabaseName"] ?? "SEALHackathonDb";
             });
 

@@ -85,10 +85,11 @@ namespace WebAPI
                 {
                     var seeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
                     await seeder.SeedAsync();
+                    app.Logger.LogInformation(">>> SUCCESS: MongoDB Seed Data completed successfully! <<<");
                 }
                 catch (Exception ex)
                 {
-                    app.Logger.LogWarning($"Auto-seeding skipped or encountered error: {ex.Message}");
+                    app.Logger.LogError(ex, ">>> ERROR: Auto-seeding failed: {Message} <<<", ex.ToString());
                 }
             }
 
