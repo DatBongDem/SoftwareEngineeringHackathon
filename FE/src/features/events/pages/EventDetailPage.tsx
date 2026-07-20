@@ -1,0 +1,82 @@
+import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { ArrowLeft, CalendarClock, ListChecks, Medal, Users } from 'lucide-react'
+import { useEvent } from '../hooks/useEvent'
+import { RoundsPanel } from '../components/RoundsPanel'
+import { TracksPanel } from '@/features/tracks/components/TracksPanel'
+import { CriteriaPanel } from '@/features/criteria/components/CriteriaPanel'
+import { Alert, Badge, Card, Spinner } from '@/shared/components'
+import { cn } from '@/shared/lib/cn'
+import { getErrorMessage } from '@/shared/lib/getErrorMessage'
+
+type Tab = 'tracks' | 'rounds' | 'criteria'
+
+const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
+  { id: 'tracks', label: 'Tracks', icon: Users },
+  { id: 'rounds', label: 'Rounds', icon: Medal },
+  { id: 'criteria', label: 'Criteria', icon: ListChecks },
+]
+
+export function EventDetailPage() {
+  const { eventId } = useParams<{ eventId: string }>()
+  const { data: event, isLoading, error } = useEvent(eventId)
+  const [activeTab, setActiveTab] = useState<Tab>('tracks')
+
+  if (isLoading) return <Spinner />
+  if (error) return <Alert tone="danger">{getErrorMessage(error)}</Alert>
+  if (!event) return null
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <Link
+          to="/events"
+          className="mb-2 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-indigo-600 dark:text-slate-400"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" /> Back to events
+        </Link>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{event.title}</h1>
+          <Badge tone={event.isActive ? 'success' : 'neutral'} dot>
+            {event.isActive ? 'Active' : 'Inactive'}
+          </Badge>
+        </div>
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{event.description}</p>
+      </div>
+
+      <Card className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-300">
+          <CalendarClock className="h-4.5 w-4.5" />
+        </span>
+        <span>
+          <span className="font-medium text-slate-900 dark:text-slate-100">
+            {event.term} {event.academicYear}
+          </span>{' '}
+          · {new Date(event.startDate).toLocaleDateString()} – {new Date(event.endDate).toLocaleDateString()}
+        </span>
+      </Card>
+
+      <div className="flex gap-1 border-b border-slate-200 dark:border-slate-800">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={cn(
+              'flex items-center gap-1.5 border-b-2 px-4 py-2 text-sm font-medium transition-colors',
+              activeTab === tab.id
+                ? 'border-indigo-600 text-indigo-600'
+                : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200',
+            )}
+          >
+            <tab.icon className="h-4 w-4" />
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === 'tracks' && <TracksPanel eventId={event.id} />}
+      {activeTab === 'rounds' && <RoundsPanel eventId={event.id} />}
+      {activeTab === 'criteria' && <CriteriaPanel eventId={event.id} />}
+    </div>
+  )
+}
