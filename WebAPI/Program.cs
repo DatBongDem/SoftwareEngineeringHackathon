@@ -47,6 +47,20 @@ namespace WebAPI
             builder.Services.AddAuthorization();
             builder.Services.AddControllers();
 
+            // Configure CORS for the frontend dev server / deployed origin(s)
+            var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+                ?? new[] { "http://localhost:5173" };
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("Frontend", policy =>
+                {
+                    policy.WithOrigins(allowedOrigins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             // Configure Swagger / OpenAPI with JWT Security Scheme
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -100,7 +114,7 @@ namespace WebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors("Frontend");
 
             app.UseAuthentication();
             app.UseAuthorization();
