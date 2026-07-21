@@ -21,6 +21,7 @@ import { JudgingQueuePage } from '@/features/judging/pages/JudgingQueuePage'
 import { RoundJudgingPage } from '@/features/judging/pages/RoundJudgingPage'
 import { CalibrationDashboardPage } from '@/features/judging/pages/CalibrationDashboardPage'
 import { RoundRankingPage } from '@/features/ranking/pages/RoundRankingPage'
+import { CriteriaTemplatesPage } from '@/features/criteria/pages/CriteriaTemplatesPage'
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ export const router = createBrowserRouter([
             children: [
               { path: 'admin/pending-users', element: <PendingUsersPage /> },
               { path: 'admin/guest-judges', element: <GuestJudgePage /> },
+              { path: 'admin/criteria-templates', element: <CriteriaTemplatesPage /> },
             ],
           },
         ],

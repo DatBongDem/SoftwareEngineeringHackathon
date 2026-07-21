@@ -3,6 +3,7 @@ import {
   CalendarRange,
   Gavel,
   LayoutDashboard,
+  ListChecks,
   LogOut,
   ShieldCheck,
   Trophy,
@@ -24,6 +25,7 @@ const judgeNavItems = [{ to: '/judging', label: 'Judging', icon: Gavel, end: fal
 const adminNavItems = [
   { to: '/admin/pending-users', label: 'Pending Approvals', icon: UserCog, end: false },
   { to: '/admin/guest-judges', label: 'Guest Judges', icon: ShieldCheck, end: false },
+  { to: '/admin/criteria-templates', label: 'Criteria Templates', icon: ListChecks, end: false },
 ]
 
 const logoutButtonClass =

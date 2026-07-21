@@ -130,22 +130,25 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Role truy cập:** Xem — mọi role; Tạo template/tiêu chí — chỉ **Coordinator**.
 - **Phụ thuộc module khác:** Event (tiêu chí gắn với event, dùng để build `RoundForm` ở Module 2); Judging (form chấm điểm ở Module 7 dựa theo danh sách criteria này).
 
-> Đã làm trước một phần nhỏ khi build Module 2 (Round cần chọn `criteriaIds`) — xem ghi chú `[x]` bên dưới. Phần Templates (dùng lại tiêu chí mẫu qua nhiều sự kiện) vẫn **chưa làm**.
+> Đã làm trước một phần nhỏ khi build Module 2 (Round cần chọn `criteriaIds`) — xem ghi chú `[x]` bên dưới.
 
 ### Trang/màn hình
-- [ ] Criteria Templates Page (danh sách template mặc định dùng lại qua các sự kiện)
-- [x] Event Criteria Tab (trong Event Detail — xem/thêm tiêu chí riêng của event) — `CriteriaPanel`, chưa có UI "kế thừa từ template" vì Templates Page chưa làm
-- [x] Create Criteria Modal (Coordinator) — hiện inline trong `CriteriaPanel`, không phải modal riêng
+- [x] Criteria Templates Page (`CriteriaTemplatesPage`, route `/admin/criteria-templates`, Coordinator-only nav + `RoleRoute`) — danh sách template mặc định dùng lại qua các sự kiện + form tạo mới. Trang này **ngay lập tức lộ ra 4 template đã seed sẵn trong DB** (Tính Sáng Tạo & Đột Phá, Trải Nghiệm UI/UX & Demo, Kiến Trúc & Chất Lượng Mã Nguồn, Khả Năng Thuyết Trình...) mà trước đây không có UI nào hiển thị được, dù BE đã seed và có endpoint sẵn từ đầu.
+- [x] Event Criteria Tab (trong Event Detail — xem/thêm tiêu chí riêng của event) — `CriteriaPanel`. Vẫn chưa có nút "kế thừa từ template" tự động copy 1 template vào event (Coordinator vẫn phải tự nhập tay tiêu chí cho từng event, kể cả khi trùng với 1 template có sẵn) — coi là gap nhỏ còn lại, không chặn chức năng cốt lõi.
+- [x] Create Criteria Modal (Coordinator) — hiện inline trong `CriteriaPanel`, không phải modal riêng.
 
 ### Component chính
-- [x] `CriteriaList`, `CriteriaCard` (hiện name, weight, maxScore) — trong `CriteriaPanel`
-- [x] `CriteriaForm` (name, description, weight, maxScore, isDefaultTemplate) — inline trong `CriteriaPanel`, luôn gửi `isDefaultTemplate: false` (tạo criteria riêng cho event, không phải template global)
+- [x] `CriteriaList`, `CriteriaCard` (hiện name, weight, maxScore) — trong `CriteriaPanel` và tái dùng style tương tự ở `CriteriaTemplatesPage`.
+- [x] `CriteriaForm` (name, description, weight, maxScore, isDefaultTemplate) — inline trong `CriteriaPanel` (luôn gửi `isDefaultTemplate: false`) và trong `CriteriaTemplatesPage` (luôn gửi `isDefaultTemplate: true`, BE cũng tự ép giá trị này ở endpoint `/templates` bất kể client gửi gì).
 
 ### API endpoint
-- `GET /api/criteria/templates` — ⚠️ chưa dùng, để dành cho Criteria Templates Page
-- `POST /api/criteria/templates` *(Coordinator)* — ⚠️ chưa dùng
+- [x] `GET /api/criteria/templates`
+- [x] `POST /api/criteria/templates` *(Coordinator)*
 - [x] `GET /api/events/{eventId}/criteria`
 - [x] `POST /api/events/{eventId}/criteria` *(Coordinator)*
+
+### Verify
+- Build + lint pass. Playwright thật (Coordinator): vào Criteria Templates → thấy 4 template đã seed từ trước → tạo thêm "Code Quality" → hiện đúng ngay trong danh sách. Đăng nhập Judge: nav "Criteria Templates" không hiện, truy cập thẳng URL bị redirect sang `/403`. Không lỗi console.
 
 ---
 
@@ -391,4 +394,4 @@ Role model, Event→Track→Round→Team→Submission→Score→Ranking→Prize,
 - ⚠️ **Vòng hiệu chuẩn (Calibration Round) cho RBL chưa xây** — chỉ có dashboard variance trên điểm thật đã chấm, chưa có cơ chế chấm bài mẫu trước khi chấm thật để giám khảo đồng thuận.
 - ⚠️ **Thông báo/công bố kết quả chưa xây** — `IEmailService` chỉ là 1 class rỗng, không có cơ chế notify/announce nào.
 - ⚠️ **Vai trò Mentor không có UI riêng** — Mentor đăng nhập thấy Dashboard y hệt Member, chỉ xuất hiện ở phía Coordinator (gán mentor cho Track).
-- Gap nhỏ, độ ưu tiên thấp: chỉ export CSV chưa có Excel (đề ghi "CSV/Excel", CSV nhiều khả năng đã đáp ứng); Criteria template không tự động copy vào event mới (Coordinator phải nhập tay lại); vài endpoint đọc (Criteria list, Ranking) không yêu cầu đăng nhập.
+- Gap nhỏ, độ ưu tiên thấp: chỉ export CSV chưa có Excel (đề ghi "CSV/Excel", CSV nhiều khả năng đã đáp ứng); Criteria template (đã có trang quản lý riêng — xem Module 4) vẫn chưa có nút "kế thừa 1-click vào event mới", Coordinator phải nhập tay lại; vài endpoint đọc (Criteria list, Ranking) không yêu cầu đăng nhập.
