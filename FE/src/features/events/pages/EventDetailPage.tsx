@@ -1,22 +1,24 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, CalendarClock, ListChecks, Medal, Users, UsersRound } from 'lucide-react'
+import { ArrowLeft, CalendarClock, ListChecks, Medal, Trophy, Users, UsersRound } from 'lucide-react'
 import { useEvent } from '../hooks/useEvent'
 import { RoundsPanel } from '../components/RoundsPanel'
 import { TracksPanel } from '@/features/tracks/components/TracksPanel'
 import { CriteriaPanel } from '@/features/criteria/components/CriteriaPanel'
 import { TeamsPanel } from '@/features/teams/components/TeamsPanel'
+import { PrizesPanel } from '@/features/prizes/components/PrizesPanel'
 import { Alert, Badge, Card, Spinner } from '@/shared/components'
 import { cn } from '@/shared/lib/cn'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
-type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams'
+type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams' | 'prizes'
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'tracks', label: 'Tracks', icon: Users },
   { id: 'rounds', label: 'Rounds', icon: Medal },
   { id: 'criteria', label: 'Criteria', icon: ListChecks },
   { id: 'teams', label: 'Teams', icon: UsersRound },
+  { id: 'prizes', label: 'Prizes', icon: Trophy },
 ]
 
 export function EventDetailPage() {
@@ -82,6 +84,7 @@ export function EventDetailPage() {
       {activeTab === 'rounds' && <RoundsPanel eventId={event.id} />}
       {activeTab === 'criteria' && <CriteriaPanel eventId={event.id} />}
       {activeTab === 'teams' && <TeamsPanel eventId={event.id} />}
+      {activeTab === 'prizes' && <PrizesPanel eventId={event.id} />}
     </div>
   )
 }

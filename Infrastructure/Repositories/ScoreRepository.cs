@@ -25,7 +25,23 @@ namespace Infrastructure.Repositories
                     s.JudgeUserId == score.JudgeUserId &&
                     s.CriterionId == score.CriterionId);
 
-                await _context.Scores.ReplaceOneAsync(filter, score, new ReplaceOptions { IsUpsert = true });
+                // Use $set (not ReplaceOneAsync) so the update body never carries an explicit
+                // `_id` field. ReplaceOneAsync sends the full document including Score.Id
+                // (which is never set client-side), and the Mongo C# driver does NOT
+                // auto-generate an ObjectId for a ReplaceOneAsync upsert the way it does for
+                // InsertOneAsync — so every upsert-insert after the first hit
+                // "E11000 duplicate key error ... _id: null". Omitting `_id` from $set lets
+                // MongoDB assign it server-side on insert and leave it untouched on update.
+                var update = Builders<Score>.Update
+                    .Set(s => s.SubmissionId, score.SubmissionId)
+                    .Set(s => s.RoundId, score.RoundId)
+                    .Set(s => s.JudgeUserId, score.JudgeUserId)
+                    .Set(s => s.CriterionId, score.CriterionId)
+                    .Set(s => s.ScoreValue, score.ScoreValue)
+                    .Set(s => s.Comment, score.Comment)
+                    .Set(s => s.CreatedAt, score.CreatedAt);
+
+                await _context.Scores.UpdateOneAsync(filter, update, new UpdateOptions { IsUpsert = true });
             }
         }
 

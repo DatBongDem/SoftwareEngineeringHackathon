@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Clock, Gavel, Plus, Rocket } from 'lucide-react'
+import { Clock, Gavel, ListOrdered, Plus, Rocket } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@/features/auth/context/AuthContext'
 import { useRounds } from '../hooks/useRounds'
 import { CreateRoundModal } from './CreateRoundModal'
 import { AssignJudgesModal } from './AssignJudgesModal'
-import { Alert, Badge, Button, Card, EmptyState, Reveal, Skeleton } from '@/shared/components'
+import { Alert, Badge, Button, buttonClassName, Card, EmptyState, Reveal, Skeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 import type { Round } from '../types'
 
@@ -73,13 +73,29 @@ export function RoundsPanel({ eventId }: { eventId: string }) {
                       </div>
                     </div>
                   </div>
-                  <div className="flex shrink-0 gap-2">
+                  <div className="flex shrink-0 flex-wrap gap-2">
+                    {(isCoordinator || round.judgeUserIds.includes(user?.id ?? '')) && (
+                      <Link
+                        to={`/rounds/${round.id}/judge?eventId=${eventId}`}
+                        className={buttonClassName({ variant: 'secondary', size: 'sm' })}
+                      >
+                        <Gavel className="h-3.5 w-3.5" />
+                        Judge
+                      </Link>
+                    )}
                     <Link
                       to={`/rounds/${round.id}/submissions?eventId=${eventId}`}
                       className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900"
                     >
                       <Rocket className="h-3.5 w-3.5" />
                       Submissions
+                    </Link>
+                    <Link
+                      to={`/rounds/${round.id}/ranking?eventId=${eventId}`}
+                      className={buttonClassName({ variant: 'secondary', size: 'sm' })}
+                    >
+                      <ListOrdered className="h-3.5 w-3.5" />
+                      Ranking
                     </Link>
                     {isCoordinator && (
                       <Button variant="secondary" size="sm" onClick={() => setAssignRound(round)}>

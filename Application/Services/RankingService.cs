@@ -44,12 +44,14 @@ namespace Application.Services
             var scoresInRound = await _scoreRepository.GetScoresByRoundIdAsync(roundId);
             var teams = await _teamRepository.GetTeamsByEventIdAsync(round.EventId);
             var teamsDict = teams.ToDictionary(t => t.Id, t => t.TeamName);
+            var teamStatusDict = teams.ToDictionary(t => t.Id, t => t.Status);
 
             var rankings = new List<TeamRankingDto>();
 
             foreach (var sub in submissions)
             {
                 var teamName = teamsDict.ContainsKey(sub.TeamId) ? teamsDict[sub.TeamId] : "Team " + sub.TeamId;
+                var isPromoted = teamStatusDict.TryGetValue(sub.TeamId, out var teamStatus) && teamStatus == TeamStatus.Promoted;
                 if (sub.IsDisqualified)
                 {
                     rankings.Add(new TeamRankingDto
@@ -73,7 +75,7 @@ namespace Application.Services
                         TeamName = teamName,
                         SubmissionId = sub.Id,
                         FinalWeightedScore = 0,
-                        IsPromoted = false,
+                        IsPromoted = isPromoted,
                         IsDisqualified = false
                     });
                     continue;
@@ -100,7 +102,7 @@ namespace Application.Services
                     TeamName = teamName,
                     SubmissionId = sub.Id,
                     FinalWeightedScore = Math.Round(finalScore, 2),
-                    IsPromoted = false,
+                    IsPromoted = isPromoted,
                     IsDisqualified = false
                 });
             }

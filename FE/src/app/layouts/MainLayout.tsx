@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import {
   CalendarRange,
+  Gavel,
   LayoutDashboard,
   LogOut,
   ShieldCheck,
@@ -17,6 +18,8 @@ const navItems = [
   { to: '/events', label: 'Events', icon: CalendarRange, end: false },
   { to: '/profile', label: 'My Profile', icon: UserCircle, end: false },
 ]
+
+const judgeNavItems = [{ to: '/judging', label: 'Judging', icon: Gavel, end: false }]
 
 const adminNavItems = [
   { to: '/admin/pending-users', label: 'Pending Approvals', icon: UserCog, end: false },
@@ -59,6 +62,7 @@ function NavItem({
 export function MainLayout() {
   const { user, logout } = useAuth()
   const isCoordinator = user?.roles.includes('Coordinator') ?? false
+  const isJudge = user?.roles.includes('Judge') ?? false
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
@@ -79,6 +83,9 @@ export function MainLayout() {
           {navItems.map((item) => (
             <NavItem key={item.to} {...item} />
           ))}
+
+          {isJudge &&
+            judgeNavItems.map((item) => <NavItem key={item.to} {...item} />)}
 
           {isCoordinator && (
             <>
@@ -131,7 +138,7 @@ export function MainLayout() {
           </div>
         </div>
         <nav className="flex gap-1 overflow-x-auto border-t border-slate-100 px-3 py-2 dark:border-slate-800">
-          {[...navItems, ...(isCoordinator ? adminNavItems : [])].map((item) => (
+          {[...navItems, ...(isJudge ? judgeNavItems : []), ...(isCoordinator ? adminNavItems : [])].map((item) => (
             <NavItem key={item.to} {...item} />
           ))}
         </nav>

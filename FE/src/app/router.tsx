@@ -17,6 +17,10 @@ import { TrackDetailPage } from '@/features/tracks/pages/TrackDetailPage'
 import { TeamDetailPage } from '@/features/teams/pages/TeamDetailPage'
 import { SubmissionDetailPage } from '@/features/submissions/pages/SubmissionDetailPage'
 import { RoundSubmissionsPage } from '@/features/submissions/pages/RoundSubmissionsPage'
+import { JudgingQueuePage } from '@/features/judging/pages/JudgingQueuePage'
+import { RoundJudgingPage } from '@/features/judging/pages/RoundJudgingPage'
+import { CalibrationDashboardPage } from '@/features/judging/pages/CalibrationDashboardPage'
+import { RoundRankingPage } from '@/features/ranking/pages/RoundRankingPage'
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +37,15 @@ export const router = createBrowserRouter([
           { path: 'teams/:teamId', element: <TeamDetailPage /> },
           { path: 'submissions/:submissionId', element: <SubmissionDetailPage /> },
           { path: 'rounds/:roundId/submissions', element: <RoundSubmissionsPage /> },
+          { path: 'rounds/:roundId/ranking', element: <RoundRankingPage /> },
+          {
+            element: <RoleRoute allowedRoles={['Judge', 'Coordinator']} />,
+            children: [
+              { path: 'judging', element: <JudgingQueuePage /> },
+              { path: 'rounds/:roundId/judge', element: <RoundJudgingPage /> },
+              { path: 'rounds/:roundId/calibration', element: <CalibrationDashboardPage /> },
+            ],
+          },
           {
             element: <RoleRoute allowedRoles={['Coordinator']} />,
             children: [

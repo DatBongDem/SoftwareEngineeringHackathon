@@ -227,24 +227,26 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Role truy cập:** **Judge** (Internal/Guest) và **Coordinator**.
 - **Phụ thuộc module khác:** Submission (chấm điểm gắn với 1 submission, tái dùng `GET /api/rounds/{roundId}/submissions` từ Module 6); Criteria (form chấm dựa theo tiêu chí của event, Module 4); Event/Round (round quyết định judge nào được assign, Module 2).
 - ⚠️ `GET /api/scoring/submission/{submissionId}` hiện không giới hạn role — bất kỳ user đã đăng nhập nào cũng xem được điểm chi tiết của từng giám khảo (ảnh hưởng tính "chấm kín"), FE có thể tự ẩn UI này với role không phải Judge/Coordinator dù API không chặn.
+- ✅ **Đã sửa bug BE chặn module này**: `ScoreRepository.CreateOrUpdateScoresAsync` trước đây dùng `ReplaceOneAsync(..., IsUpsert = true)` gửi nguyên document (kể cả `Score.Id` chưa set, tức `null`) lên Mongo — driver C# không tự sinh `ObjectId` cho `_id` trong trường hợp này (chỉ tự sinh với `InsertOneAsync` thường), nên document mới thứ 2 trở đi luôn bị `E11000 duplicate key error _id: null`, chặn hoàn toàn việc chấm >1 tiêu chí. Đã đổi sang `UpdateOneAsync` + `$set` từng field (không đụng `_id`) — Mongo tự sinh `_id` khi insert, giữ nguyên khi update. Đã verify thật qua API: chấm 4 tiêu chí trong 1 lần gọi (insert) rồi gọi lại lần 2 với giá trị khác (update) — cả 2 đều trả `200`, không trùng lặp document.
 
 ### Trang/màn hình
-- [ ] Judging Queue Page (Judge — danh sách submission cần chấm trong round được assign)
-- [ ] Score Submission Page (form nhập điểm theo từng criterion + comment)
-- [ ] My Scores Page (Judge xem lại điểm mình đã chấm cho 1 submission)
-- [ ] Calibration/Variance Dashboard Page (Judge + Coordinator — phân bố điểm giữa các giám khảo theo criterion trong 1 round hiệu chuẩn)
+- [x] Judging Queue Page (`JudgingQueuePage`, route `/judging`) — danh sách round được assign cho judge hiện tại (tự tổng hợp client-side từ `GET /api/events` + `GET /api/events/{id}/rounds` vì BE không có endpoint "rounds theo judge"), mỗi round link sang trang chấm + calibration.
+- [x] Score Submission Page — thiết kế lại thành **modal** (`ScoreModal`) mở từ `RoundJudgingPage`, nhất quán với pattern "Submit project" ở Module 6 thay vì trang riêng.
+- [x] ~~My Scores Page~~ — không tách trang riêng; `ScoreModal` tự động điền lại điểm + comment đã chấm trước đó của chính judge khi mở lại (đã verify: mở modal cho submission đã chấm hiển thị đúng giá trị/comment cũ), phục vụ luôn nhu cầu "xem lại điểm mình đã chấm".
+- [x] Calibration/Variance Dashboard Page (`CalibrationDashboardPage`, route `/rounds/:roundId/calibration`) — bảng mean/variance/stddev/số judge theo từng criterion, đánh dấu "High variance" (badge amber) khi stddev > 1.3× trung bình các criterion trong round.
 
 ### Component chính
-- [ ] `SubmissionQueueList`
-- [ ] `ScoreForm` (list `CriterionScoreItem`: criterionId, score, comment)
-- [ ] `CriterionScoreInput` (input điểm giới hạn theo `maxScore` của criterion)
-- [ ] `ScoreHistoryList`
-- [ ] `VarianceTable`/`VarianceChart` (mean/variance/stddev/totalJudges theo từng criterion — dùng lại ở Module 10)
+- [x] `RoundJudgingPage` thay cho `SubmissionQueueList` riêng — liệt kê submission chưa bị loại trong round, badge trạng thái "Not scored yet / N/M criteria scored / Scored" tính từ `GET /api/scoring/submission/{id}` lọc theo judge hiện tại.
+- [x] `ScoreModal` (thay `ScoreForm`) — input điểm + comment cho từng criterion, giới hạn `min=0 max={criterion.maxScore}`, cuộn riêng (`max-h-[55vh] overflow-y-auto`) vì Modal dùng chung không tự giới hạn chiều cao.
+- [x] `VarianceTable` (thay `VarianceChart` — dùng bảng vì đủ rõ với số criterion ít, chưa cần chart).
 
 ### API endpoint
 - `POST /api/scoring/submit-scores` *(Judge, Coordinator)*
 - `GET /api/scoring/submission/{submissionId}`
 - `GET /api/scoring/calibration/variance?roundId=` *(Judge, Coordinator)*
+
+### Verify
+- Build + lint pass. Playwright thật với `judge.internal1@fpt.edu.vn`: đăng nhập → thấy nav "Judging" → vào round đã assign → chấm 4 tiêu chí trong 1 lần (test chính xác kịch bản bug BE cũ) → animation "Scores saved!" → badge chuyển "Scored" → mở lại modal thấy điền sẵn điểm/comment cũ → xem Calibration Dashboard thấy đúng mean/stddev/variance tính từ 5 judge (bao gồm dữ liệu test lúc sửa bug BE). Không lỗi console xuyên suốt.
 
 ---
 
@@ -254,18 +256,23 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Role truy cập:** Xem bảng xếp hạng — mọi role; Promote (thăng vòng) — chỉ **Coordinator**.
 - **Phụ thuộc module khác:** Judging (ranking tính từ Score); Event/Round (ranking theo từng round); Team (hiển thị tên đội trong bảng).
 - ⚠️ BE hiện **chỉ có ranking theo Round** (`GET /api/rankings/round/{roundId}`), chưa có API tổng hợp theo Track hay theo toàn Event như `TV.docx` yêu cầu ("xếp hạng đội theo từng vòng, từng Hạng mục và toàn bộ sự kiện") — nếu cần, FE phải tự gộp nhiều round lại phía client hoặc chờ BE bổ sung endpoint.
+- ✅ **Đã sửa bug BE phát hiện khi verify sống**: `RankingService.CalculateRoundRankingAsync` hardcode `IsPromoted = false` cho mọi dòng — không bao giờ đọc `Team.Status` thật, dù `PromoteTopTeamsAsync` cập nhật đúng `Team.Status = Promoted`. Kết quả: bấm "Promote" chạy thành công nhưng badge "Promoted" không bao giờ hiện trên bảng xếp hạng. Đã sửa: join thêm `teamStatusDict` (Id → `TeamStatus`) và set `IsPromoted` theo `Team.Status == TeamStatus.Promoted` thật. Verify lại: cả 2 team đều hiện badge "Promoted" đúng sau khi promote.
 
 ### Trang/màn hình
-- [ ] Round Ranking Page (bảng xếp hạng 1 round — mọi role xem)
-- [ ] Promote Teams Action + Confirm Modal (Coordinator)
+- [x] Round Ranking Page (`RoundRankingPage`, route `/rounds/:roundId/ranking?eventId=`) — mọi role xem, không cần RoleRoute riêng.
+- [x] Promote Teams Action + Confirm Modal (`PromoteConfirmModal`, Coordinator-only nút "Promote top N" lấy N từ `round.promotionRuleTopN`).
 
 ### Component chính
-- [ ] `RankingTable` (rank, teamName, submissionId, finalWeightedScore, isPromoted, isDisqualified)
-- [ ] `PromoteButton` + `ConfirmModal`
+- [x] `RankingTable` — rank #1 có huy hiệu trophy amber (điểm nhấn duy nhất, không lạm dụng màu accent), score dùng `font-display tabular-nums`, badge Promoted/Disqualified.
+- [x] `PromoteConfirmModal` (thay `PromoteButton` riêng — gộp trigger vào `PageHeader` action).
+- Link "Ranking" thêm vào `RoundsPanel` cạnh Judge/Submissions/Assign judges.
 
 ### API endpoint
 - `GET /api/rankings/round/{roundId}`
 - `POST /api/rankings/round/{roundId}/promote` *(Coordinator)*
+
+### Verify
+- Build + lint pass. Playwright thật (Coordinator): mở Ranking từ tab Rounds → thấy CodeWarriors #1 (86.71, trophy amber), InnovateX #2 (83.75) — điểm tính đúng từ dữ liệu Score thật đã chấm ở Module 7 → bấm Promote → confirm modal → cả 2 team hiện badge "Promoted" (sau khi sửa bug BE ở trên). Dark mode kiểm tra riêng, không lỗi console.
 
 ---
 
@@ -276,16 +283,19 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Phụ thuộc module khác:** Event (prize thuộc event); Team (chọn đội nhận giải); Ranking (thường tạo giải dựa trên kết quả xếp hạng cuối cùng ở Module 8).
 
 ### Trang/màn hình
-- [ ] Prizes List Page (theo event — mọi role xem, dùng để công bố kết quả)
-- [ ] Create Prize Modal (Coordinator)
+- [x] Prizes List Page — thiết kế thành **tab "Prizes" thứ 5** trong `EventDetailPage` (`PrizesPanel`), nhất quán với Tracks/Rounds/Criteria/Teams thay vì trang riêng.
+- [x] Create Prize Modal (`CreatePrizeModal`, Coordinator) — chọn team/track thật qua `Select` (tái dùng `useTeamsByEvent`/`useTracks`), không phải nhập ID tay.
 
 ### Component chính
-- [ ] `PrizeList`, `PrizeCard`
-- [ ] `CreatePrizeForm` (name, trackId?, teamId, reward)
+- [x] `PrizesPanel` (thay `PrizeList`) + `PrizeCard` inline — icon trophy nền amber (điểm nhấn "giải thưởng" tự nhiên nhất cho màu accent mới), badge tên đội + hạng mục (nếu có).
+- [x] `CreatePrizeModal` (thay `CreatePrizeForm` độc lập).
 
 ### API endpoint
 - `GET /api/events/{eventId}/prizes`
 - `POST /api/events/{eventId}/prizes` *(Coordinator)*
+
+### Verify
+- Build + lint pass. Playwright thật (Coordinator): tab Prizes rỗng → tạo giải "Best Overall" chọn team CodeWarriors, phần thưởng "10,000,000 VND + certificate" → card mới hiện đúng ngay, không lỗi console.
 
 ---
 
