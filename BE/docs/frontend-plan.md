@@ -306,18 +306,22 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Phụ thuộc module khác:** Judging (dữ liệu variance ở Module 7, tái sử dụng component `VarianceTable`); Ranking (dữ liệu export); Event (chọn event/round để export).
 
 ### Trang/màn hình
-- [ ] Export Center Page (Coordinator — 1 trang gom các nút export)
-- [ ] Variance Dashboard tổng hợp theo Event (nếu cần xem nhiều round cùng lúc, ngoài view theo round ở Module 7)
+- [x] Export Center Page — thiết kế thành **tab "Export" thứ 6** trong `EventDetailPage` (`ExportPanel`), **chỉ hiện với Coordinator** (tab bị ẩn hoàn toàn khỏi thanh tab cho role khác, đã verify bằng Playwright đăng nhập Judge — 0 tab Export xuất hiện).
+- [x] ~~Variance Dashboard tổng hợp theo Event~~ — không xây riêng (đánh dấu "nếu cần" trong plan gốc, BE cũng không có endpoint tổng hợp nhiều round). Thay vào đó mỗi round trong tab Export có nút "Calibration" link thẳng sang `CalibrationDashboardPage` theo round đã có ở Module 7 — đủ dùng, không trùng lặp component.
 
 ### Component chính
-- [ ] `ExportRankingsCsvButton`
-- [ ] `ExportRblDatasetCsvButton`
-- [ ] (tái sử dụng `VarianceTable`/`VarianceChart` từ Module 7)
+- [x] `ExportRblDatasetCsvButton` — nút chính, luôn hiện đầu trang.
+- [x] `ExportRankingsCsvButton` — 1 nút mỗi round trong danh sách.
+- [x] `ExportPanel` (component gom, thay vì trang riêng).
+- [x] `shared/lib/downloadBlob.ts` — helper dùng chung: `apiClient.get(url, { responseType: 'blob' })` rồi tạo `<a download>` tạm thời + `URL.createObjectURL`/`revokeObjectURL`. Cần thiết vì cả 2 endpoint export đều `[Authorize(Roles="Coordinator")]` — không thể dùng link `<a href>` trần (không gắn JWT header), phải fetch qua `apiClient` (đã có interceptor gắn Bearer token) rồi tự trigger download.
 
 ### API endpoint
 - `GET /api/export/rankings/csv?roundId=` *(Coordinator)*
 - `GET /api/export/rbl-dataset/csv?eventId=` *(Coordinator)*
 - `GET /api/scoring/calibration/variance?roundId=` *(tái sử dụng từ Module 7)*
+
+### Verify
+- Build + lint pass. Playwright thật (Coordinator): mở tab Export → bấm "Export anonymized dataset" → file CSV tải về thật, nội dung đúng format `SubmissionAnonId,JudgeAnonId,CriterionId,CriterionName,Weight,ScoreValue` với ID đã ẩn danh (`SUB_ANON_001`, `JUDGE_ANON_001`...) → bấm "Export CSV" ở 1 round → file `rankings_round_{id}.csv` tải về đúng dữ liệu ranking thật (khớp bảng đã xem ở Module 8). Đăng nhập Judge kiểm tra lại: tab Export không hiện. Không lỗi console.
 
 ---
 
@@ -331,14 +335,17 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - ⚠️ BE hiện **chỉ ghi log cho hành động `SUBMIT_SCORE`**, chưa log disqualify/promote/approve dù `TV.docx` yêu cầu đầy đủ — FE hiển thị đúng dữ liệu BE trả về, phần thiếu log là gap cần báo lại nhóm backend.
 
 ### Trang/màn hình
-- [ ] Audit Log Page (theo event — bảng log: action, performedBy, targetEntityId, details, timestamp)
+- [x] Audit Log Page — thiết kế thành **tab "Audit Log" thứ 7** trong `EventDetailPage` (`AuditLogPanel`), **chỉ hiện với Coordinator**, nhất quán với tab Export ở Module 10. Bảng sort mới nhất trước.
 
 ### Component chính
-- [ ] `AuditLogTable`
-- [ ] `AuditLogFilter` (theo event, theo loại action)
+- [x] `AuditLogTable` — cột Target là link sang `SubmissionDetailPage` khi `action === 'SUBMIT_SCORE'` (đúng ngữ nghĩa hiện tại vì `TargetEntityId` chính là `SubmissionId`); "Performed by" hiển thị raw user ID kèm `Alert` giải thích rõ vì BE chưa có endpoint "get user by ID".
+- [x] `AuditLogFilter` — dropdown lọc theo action, options tự sinh từ dữ liệu thật đang có (hiện chỉ có `SUBMIT_SCORE` do gap BE đã ghi ở trên) thay vì liệt kê action giả định chưa tồn tại.
 
 ### API endpoint
 - `GET /api/auditlogs?eventId=` *(Coordinator)*
+
+### Verify
+- Build + lint pass. Playwright thật: Judge chấm điểm mới → Coordinator mở tab Audit Log → entry mới nhất hiện đúng ở đầu bảng (sort mới nhất trước), bấm vào Target link điều hướng đúng sang `SubmissionDetailPage`. Không lỗi console.
 
 ---
 

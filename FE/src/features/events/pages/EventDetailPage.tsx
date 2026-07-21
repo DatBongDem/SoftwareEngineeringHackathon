@@ -1,17 +1,20 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, CalendarClock, ListChecks, Medal, Trophy, Users, UsersRound } from 'lucide-react'
+import { ArrowLeft, CalendarClock, Download, ListChecks, Medal, ScrollText, Trophy, Users, UsersRound } from 'lucide-react'
+import { useAuth } from '@/features/auth/context/AuthContext'
 import { useEvent } from '../hooks/useEvent'
 import { RoundsPanel } from '../components/RoundsPanel'
 import { TracksPanel } from '@/features/tracks/components/TracksPanel'
 import { CriteriaPanel } from '@/features/criteria/components/CriteriaPanel'
 import { TeamsPanel } from '@/features/teams/components/TeamsPanel'
 import { PrizesPanel } from '@/features/prizes/components/PrizesPanel'
+import { ExportPanel } from '@/features/export/components/ExportPanel'
+import { AuditLogPanel } from '@/features/auditlog/components/AuditLogPanel'
 import { Alert, Badge, Card, Spinner } from '@/shared/components'
 import { cn } from '@/shared/lib/cn'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
-type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams' | 'prizes'
+type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams' | 'prizes' | 'export' | 'audit-log'
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'tracks', label: 'Tracks', icon: Users },
@@ -21,10 +24,19 @@ const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'prizes', label: 'Prizes', icon: Trophy },
 ]
 
+const coordinatorTabs: { id: Tab; label: string; icon: typeof Users }[] = [
+  { id: 'export', label: 'Export', icon: Download },
+  { id: 'audit-log', label: 'Audit Log', icon: ScrollText },
+]
+
 export function EventDetailPage() {
   const { eventId } = useParams<{ eventId: string }>()
+  const { user } = useAuth()
+  const isCoordinator = user?.roles.includes('Coordinator') ?? false
   const { data: event, isLoading, error } = useEvent(eventId)
   const [activeTab, setActiveTab] = useState<Tab>('tracks')
+
+  const visibleTabs = isCoordinator ? [...tabs, ...coordinatorTabs] : tabs
 
   if (isLoading) return <Spinner />
   if (error) return <Alert tone="danger">{getErrorMessage(error)}</Alert>
@@ -63,7 +75,7 @@ export function EventDetailPage() {
       </Card>
 
       <div className="flex gap-1 border-b border-slate-200 dark:border-slate-800">
-        {tabs.map((tab) => (
+        {visibleTabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
@@ -85,6 +97,8 @@ export function EventDetailPage() {
       {activeTab === 'criteria' && <CriteriaPanel eventId={event.id} />}
       {activeTab === 'teams' && <TeamsPanel eventId={event.id} />}
       {activeTab === 'prizes' && <PrizesPanel eventId={event.id} />}
+      {activeTab === 'export' && isCoordinator && <ExportPanel eventId={event.id} />}
+      {activeTab === 'audit-log' && isCoordinator && <AuditLogPanel eventId={event.id} />}
     </div>
   )
 }
