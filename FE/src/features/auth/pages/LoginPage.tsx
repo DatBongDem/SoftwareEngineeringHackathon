@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { Lock, LogIn, Mail } from 'lucide-react'
+import { LogIn, Mail } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
-import { Alert, Button, Card, Input } from '@/shared/components'
+import { Alert, Button, Card, Input, PasswordInput } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
 export function LoginPage() {
@@ -29,7 +29,9 @@ export function LoginPage() {
     <Card className="sm:p-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Welcome back</h2>
+          <h2 className="font-display text-xl font-semibold text-slate-900 dark:text-slate-100">
+            Welcome back
+          </h2>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Log in to manage your event, team, or scoring.
           </p>
@@ -47,10 +49,8 @@ export function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
+          <PasswordInput
             label="Password"
-            type="password"
-            icon={<Lock className="h-4 w-4" />}
             placeholder="••••••••"
             required
             value={password}

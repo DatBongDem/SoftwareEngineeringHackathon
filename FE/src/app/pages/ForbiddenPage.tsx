@@ -9,7 +9,9 @@ export function ForbiddenPage() {
         <ShieldAlert className="h-6 w-6" />
       </span>
       <div>
-        <h1 className="text-3xl font-semibold text-slate-900 dark:text-slate-100">403</h1>
+        <h1 className="font-display text-3xl font-semibold tabular-nums text-slate-900 dark:text-slate-100">
+          403
+        </h1>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           You don't have permission to view this page.
         </p>

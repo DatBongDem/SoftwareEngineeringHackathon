@@ -38,7 +38,9 @@ export function TrackDetailPage() {
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Back to event
         </Link>
-        <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{track?.name}</h1>
+        <h1 className="font-display text-2xl font-semibold text-slate-900 dark:text-slate-100">
+          {track?.name}
+        </h1>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{track?.description}</p>
       </div>
 

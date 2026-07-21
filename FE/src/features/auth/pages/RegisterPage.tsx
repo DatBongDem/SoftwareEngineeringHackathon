@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { Mail, User, UserPlus } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
-import { Alert, Button, Card, Input, Select } from '@/shared/components'
+import { Alert, Button, Card, Input, PasswordInput, Select } from '@/shared/components'
+import { cn } from '@/shared/lib/cn'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 import { UserType } from '@/shared/types/enums'
 
@@ -50,7 +51,9 @@ export function RegisterPage() {
     <Card className="sm:p-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Create your account</h2>
+          <h2 className="font-display text-xl font-semibold text-slate-900 dark:text-slate-100">
+            Create your account
+          </h2>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Join a hackathon event as a student or lecturer.
           </p>
@@ -75,9 +78,8 @@ export function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
+          <PasswordInput
             label="Password"
-            type="password"
             placeholder="At least 6 characters"
             required
             minLength={6}
@@ -92,22 +94,31 @@ export function RegisterPage() {
             onChange={(e) => setUserType(e.target.value)}
           />
 
-          {!isLecturer && (
-            <Input
-              label="Student ID"
-              required
-              value={studentId}
-              onChange={(e) => setStudentId(e.target.value)}
-            />
-          )}
-          {isExternal && (
-            <Input
-              label="University name"
-              required
-              value={universityName}
-              onChange={(e) => setUniversityName(e.target.value)}
-            />
-          )}
+          <div
+            className={cn(
+              'grid transition-[grid-template-rows] duration-300 ease-out',
+              isLecturer ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',
+            )}
+          >
+            <div className="overflow-hidden">
+              <div className={cn('grid gap-4 pt-0.5', isExternal ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1')}>
+                <Input
+                  label="Student ID"
+                  required={!isLecturer}
+                  value={studentId}
+                  onChange={(e) => setStudentId(e.target.value)}
+                />
+                {isExternal && (
+                  <Input
+                    label="University name"
+                    required
+                    value={universityName}
+                    onChange={(e) => setUniversityName(e.target.value)}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         <Button type="submit" loading={mutation.isPending} className="w-full">

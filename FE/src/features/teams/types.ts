@@ -16,3 +16,17 @@ export interface Team {
   members: TeamMemberInfo[]
   status: TeamStatus
 }
+
+export interface CreateTeamPayload {
+  eventId: string
+  teamName: string
+  trackId?: string
+}
+
+export interface InviteMemberPayload {
+  emailOrStudentId: string
+}
+
+export interface RegisterTrackPayload {
+  trackId: string
+}
