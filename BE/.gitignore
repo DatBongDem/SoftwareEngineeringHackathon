@@ -3,17 +3,12 @@ appsettings.json
 appsettings.Development.json
 appsettings.*.json
 !appsettings.example.json
-.env
 
 ## Ignore Visual Studio & .NET build output
-**/bin/
-**/obj/
-**/.vs/
+bin/
+obj/
+.vs/
 *.user
 *.userosscache
 *.sln.docstates
 .vscode/
-
-## Ignore Node / Frontend build output
-**/node_modules/
-**/dist/
