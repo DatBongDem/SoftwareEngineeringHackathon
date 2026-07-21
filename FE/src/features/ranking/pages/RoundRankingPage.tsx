@@ -3,10 +3,11 @@ import { ArrowLeft, Award, ListOrdered } from 'lucide-react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useAuth } from '@/features/auth/context/AuthContext'
 import { useRounds } from '@/features/events/hooks/useRounds'
+import { useTracks } from '@/features/tracks/hooks/useTracks'
 import { useRoundRanking } from '../hooks/useRoundRanking'
 import { RankingTable } from '../components/RankingTable'
 import { PromoteConfirmModal } from '../components/PromoteConfirmModal'
-import { Alert, Button, EmptyState, PageHeader, TableSkeleton } from '@/shared/components'
+import { Alert, Button, EmptyState, PageHeader, Select, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
 export function RoundRankingPage() {
@@ -17,7 +18,9 @@ export function RoundRankingPage() {
   const isCoordinator = user?.roles.includes('Coordinator') ?? false
 
   const { data: rounds } = useRounds(eventId)
-  const { data: ranking, isLoading, error } = useRoundRanking(roundId)
+  const { data: tracks } = useTracks(eventId)
+  const [trackFilter, setTrackFilter] = useState('')
+  const { data: ranking, isLoading, error } = useRoundRanking(roundId, trackFilter || undefined)
   const [promoteOpen, setPromoteOpen] = useState(false)
 
   const round = rounds?.find((r) => r.id === roundId)
@@ -41,24 +44,38 @@ export function RoundRankingPage() {
         </Link>
         <PageHeader
           title={round ? `Ranking — Round ${round.roundNumber}: ${round.name}` : 'Ranking'}
-          description="Teams ranked by final weighted score (average per criterion × criterion weight)."
+          description="Teams ranked by final weighted score (average per criterion × criterion weight). Promotion takes the top N teams within each Track, not top N overall."
           action={
             isCoordinator &&
             round && (
               <Button size="sm" onClick={() => setPromoteOpen(true)}>
                 <Award className="h-4 w-4" />
-                Promote top {round.promotionRuleTopN}
+                Promote top {round.promotionRuleTopN} per track
               </Button>
             )
           }
         />
       </div>
 
+      {tracks && tracks.length > 0 && (
+        <Select
+          label="Filter by track"
+          placeholder="All tracks"
+          options={tracks.map((track) => ({ value: track.id, label: track.name }))}
+          value={trackFilter}
+          onChange={(e) => setTrackFilter(e.target.value)}
+          className="max-w-xs"
+        />
+      )}
+
       {error && <Alert tone="danger">{getErrorMessage(error)}</Alert>}
       {isLoading && <TableSkeleton columns={4} rows={4} />}
 
       {!isLoading && ranking && ranking.length === 0 && (
-        <EmptyState icon={ListOrdered} message="No submissions to rank in this round yet." />
+        <EmptyState
+          icon={ListOrdered}
+          message={trackFilter ? 'No submissions from this track in this round yet.' : 'No submissions to rank in this round yet.'}
+        />
       )}
 
       {ranking && ranking.length > 0 && <RankingTable data={ranking} />}

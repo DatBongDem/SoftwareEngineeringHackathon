@@ -5,6 +5,27 @@ namespace Application.Features.Rankings
         public int Rank { get; set; }
         public string TeamId { get; set; } = default!;
         public string TeamName { get; set; } = default!;
+        public string? TrackId { get; set; }
+        public string SubmissionId { get; set; } = default!;
+        public double FinalWeightedScore { get; set; }
+        public bool IsPromoted { get; set; }
+        public bool IsDisqualified { get; set; }
+    }
+
+    // Overall standings across an entire event: each team is placed by the
+    // furthest round it reached (later round beats earlier round, regardless
+    // of score), then by that round's score — matches single-elimination
+    // tournament standings semantics.
+    public class EventRankingEntryDto
+    {
+        public int Rank { get; set; }
+        public string TeamId { get; set; } = default!;
+        public string TeamName { get; set; } = default!;
+        public string? TrackId { get; set; }
+        public string? TrackName { get; set; }
+        public string RoundId { get; set; } = default!;
+        public int RoundNumber { get; set; }
+        public string RoundName { get; set; } = default!;
         public string SubmissionId { get; set; } = default!;
         public double FinalWeightedScore { get; set; }
         public bool IsPromoted { get; set; }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, CalendarClock, Download, ListChecks, Medal, ScrollText, Trophy, Users, UsersRound } from 'lucide-react'
+import { ArrowLeft, CalendarClock, Download, ListChecks, ListOrdered, Medal, ScrollText, Trophy, Users, UsersRound } from 'lucide-react'
 import { useAuth } from '@/features/auth/context/AuthContext'
 import { useEvent } from '../hooks/useEvent'
 import { RoundsPanel } from '../components/RoundsPanel'
@@ -10,11 +10,12 @@ import { TeamsPanel } from '@/features/teams/components/TeamsPanel'
 import { PrizesPanel } from '@/features/prizes/components/PrizesPanel'
 import { ExportPanel } from '@/features/export/components/ExportPanel'
 import { AuditLogPanel } from '@/features/auditlog/components/AuditLogPanel'
+import { EventRankingPanel } from '@/features/ranking/components/EventRankingPanel'
 import { Alert, Badge, Card, Spinner } from '@/shared/components'
 import { cn } from '@/shared/lib/cn'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
-type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams' | 'prizes' | 'export' | 'audit-log'
+type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams' | 'prizes' | 'ranking' | 'export' | 'audit-log'
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'tracks', label: 'Tracks', icon: Users },
@@ -22,6 +23,7 @@ const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'criteria', label: 'Criteria', icon: ListChecks },
   { id: 'teams', label: 'Teams', icon: UsersRound },
   { id: 'prizes', label: 'Prizes', icon: Trophy },
+  { id: 'ranking', label: 'Ranking', icon: ListOrdered },
 ]
 
 const coordinatorTabs: { id: Tab; label: string; icon: typeof Users }[] = [
@@ -97,6 +99,7 @@ export function EventDetailPage() {
       {activeTab === 'criteria' && <CriteriaPanel eventId={event.id} />}
       {activeTab === 'teams' && <TeamsPanel eventId={event.id} />}
       {activeTab === 'prizes' && <PrizesPanel eventId={event.id} />}
+      {activeTab === 'ranking' && <EventRankingPanel eventId={event.id} />}
       {activeTab === 'export' && isCoordinator && <ExportPanel eventId={event.id} />}
       {activeTab === 'audit-log' && isCoordinator && <AuditLogPanel eventId={event.id} />}
     </div>

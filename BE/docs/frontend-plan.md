@@ -255,24 +255,33 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 **Bối cảnh:**
 - **Role truy cập:** Xem bảng xếp hạng — mọi role; Promote (thăng vòng) — chỉ **Coordinator**.
 - **Phụ thuộc module khác:** Judging (ranking tính từ Score); Event/Round (ranking theo từng round); Team (hiển thị tên đội trong bảng).
-- ⚠️ BE hiện **chỉ có ranking theo Round** (`GET /api/rankings/round/{roundId}`), chưa có API tổng hợp theo Track hay theo toàn Event như `TV.docx` yêu cầu ("xếp hạng đội theo từng vòng, từng Hạng mục và toàn bộ sự kiện") — nếu cần, FE phải tự gộp nhiều round lại phía client hoặc chờ BE bổ sung endpoint.
+- ✅ **Đã sửa gap so với `TV.docx`** ("xếp hạng đội theo từng vòng, từng Hạng mục và toàn bộ sự kiện" + "top N đội **mỗi Hạng mục** vào vòng tiếp theo") — phát hiện qua audit code thật đối chiếu `TV.docx`, xem chi tiết trong section "Rà soát yêu cầu đề bài" cuối file. Đã sửa 2 việc:
+  1. Thêm `GET /api/rankings/round/{roundId}?trackId=` (lọc theo Track trong 1 round) và `GET /api/rankings/event/{eventId}` (xếp hạng toàn event) — trước đây chỉ có ranking theo Round gộp chung mọi Track.
+  2. `PromoteTopTeamsAsync` trước đây lấy top N **toàn round** bất kể Track (`rankings.Take(topN)`) — sai so với đề. Đã sửa: group theo `Team.TrackId` trước, mỗi Track lấy top N riêng.
+  - Công thức "xếp hạng toàn event" (đề không nói rõ, đã hỏi và chốt với user): mỗi đội xếp theo **vòng xa nhất còn tham gia** (đội vào Final xếp trên đội bị loại ở Preliminary), cùng vòng thì so điểm vòng đó.
 - ✅ **Đã sửa bug BE phát hiện khi verify sống**: `RankingService.CalculateRoundRankingAsync` hardcode `IsPromoted = false` cho mọi dòng — không bao giờ đọc `Team.Status` thật, dù `PromoteTopTeamsAsync` cập nhật đúng `Team.Status = Promoted`. Kết quả: bấm "Promote" chạy thành công nhưng badge "Promoted" không bao giờ hiện trên bảng xếp hạng. Đã sửa: join thêm `teamStatusDict` (Id → `TeamStatus`) và set `IsPromoted` theo `Team.Status == TeamStatus.Promoted` thật. Verify lại: cả 2 team đều hiện badge "Promoted" đúng sau khi promote.
 
 ### Trang/màn hình
-- [x] Round Ranking Page (`RoundRankingPage`, route `/rounds/:roundId/ranking?eventId=`) — mọi role xem, không cần RoleRoute riêng.
-- [x] Promote Teams Action + Confirm Modal (`PromoteConfirmModal`, Coordinator-only nút "Promote top N" lấy N từ `round.promotionRuleTopN`).
+- [x] Round Ranking Page (`RoundRankingPage`, route `/rounds/:roundId/ranking?eventId=`) — mọi role xem, không cần RoleRoute riêng. Có bộ lọc theo Track (Select) — chọn 1 Track thì gọi `?trackId=` để xem xếp hạng riêng trong Track đó.
+- [x] Event Ranking — thiết kế thành **tab "Ranking" thứ 6** trong `EventDetailPage` (`EventRankingPanel`), mọi role xem được (không giới hạn Coordinator, đúng yêu cầu "View Ranking: mọi role"). Hiện thêm cột Track + "Reached" (vòng xa nhất).
+- [x] Promote Teams Action + Confirm Modal (`PromoteConfirmModal`, Coordinator-only nút "Promote top N per track" — text đã cập nhật để rõ ràng là theo từng Track).
 
 ### Component chính
-- [x] `RankingTable` — rank #1 có huy hiệu trophy amber (điểm nhấn duy nhất, không lạm dụng màu accent), score dùng `font-display tabular-nums`, badge Promoted/Disqualified.
+- [x] `RankingTable` — đổi thành generic `RankingTable<T extends TeamRanking>`, nhận thêm prop `extraColumns` để tái dùng cho cả bảng theo Round (không cột thêm) và bảng theo Event (cột Track + Reached) mà không đổi hành vi bảng theo Round hiện có. Rank #1 có huy hiệu trophy amber, score dùng `font-display tabular-nums`, badge Promoted/Disqualified.
+- [x] `EventRankingPanel` (mới) — dùng lại `RankingTable` với `extraColumns`.
 - [x] `PromoteConfirmModal` (thay `PromoteButton` riêng — gộp trigger vào `PageHeader` action).
 - Link "Ranking" thêm vào `RoundsPanel` cạnh Judge/Submissions/Assign judges.
 
 ### API endpoint
-- `GET /api/rankings/round/{roundId}`
-- `POST /api/rankings/round/{roundId}/promote` *(Coordinator)*
+- `GET /api/rankings/round/{roundId}?trackId=` (param mới, optional — không phá endpoint cũ)
+- `GET /api/rankings/event/{eventId}` (mới)
+- `POST /api/rankings/round/{roundId}/promote` *(Coordinator)* — logic bên trong đổi sang group theo Track, route/contract không đổi.
 
 ### Verify
-- Build + lint pass. Playwright thật (Coordinator): mở Ranking từ tab Rounds → thấy CodeWarriors #1 (86.71, trophy amber), InnovateX #2 (83.75) — điểm tính đúng từ dữ liệu Score thật đã chấm ở Module 7 → bấm Promote → confirm modal → cả 2 team hiện badge "Promoted" (sau khi sửa bug BE ở trên). Dark mode kiểm tra riêng, không lỗi console.
+- Build BE (`dotnet build`) + build/lint FE pass.
+- Verify BE qua API thật: endpoint Round ranking cũ (không truyền `trackId`) trả kết quả y hệt trước khi sửa (không phá tính năng); endpoint mới lọc theo Track trả đúng 1 team (AI track chỉ có CodeWarriors); endpoint Event ranking trả cả 2 team kèm đúng Track/Round context; gọi lại `/promote` sau khi refactor vẫn trả `200` không lỗi.
+- Playwright thật (Coordinator): tab "Ranking" mới trong EventDetailPage hiện đúng 2 team kèm cột Track + Reached; vào Round Ranking chọn filter "AI & Machine Learning" → bảng chỉ còn đúng CodeWarriors (xác nhận filter hoạt động đúng); modal Promote hiện đúng text "top N per track". Không lỗi console.
+- Lưu ý: chưa dựng được kịch bản có ≥2 team/Track với `PromotionRuleTopN` nhỏ để thấy rõ khác biệt hành vi promote cũ-vs-mới trên dữ liệu thật (dữ liệu seed hiện tại mỗi Track chỉ có 1 team) — đã verify đúng qua đọc code + qua việc track-ranking lọc đúng theo Track (chứng minh `TrackId` được gắn đúng vào từng dòng ranking, là nền tảng để `GroupBy(TrackId)` trong `PromoteTopTeamsAsync` hoạt động đúng), nhưng chưa có bằng chứng "trước/sau" trực quan trên cùng 1 bộ dữ liệu nhiều team/track.
 
 ---
 
@@ -360,3 +369,26 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - [x] **Scroll-reveal**: `shared/hooks/useInView.ts` (IntersectionObserver) + `shared/components/Reveal.tsx`, dùng `slide-in-from-bottom` đã có sẵn từ Module 6. Áp cho list/grid: Dashboard (stat cards, quick access), EventsListPage, TracksPanel, RoundsPanel, TeamsPanel, TeamDetailPage (member cards) — không áp cho từng dòng bảng (Table) để tránh rối mắt. Tôn trọng `prefers-reduced-motion` (hiện ngay, không animation).
 - [x] **WCAG AA fix thật phát hiện qua đo contrast**: `amber-600` trên nền trắng/`amber-50` chỉ đạt ~3.1–3.2:1 (< 4.5:1 yêu cầu cho text) — đổi sang `amber-700` (~4.8–5.0:1) ở `DashboardPage` (icon Stat) và `TeamsPanel` ("· Your team"). Dark mode variants (`amber-300`/`amber-400` trên nền tối) đã đạt >10:1, không cần đổi.
 - [x] Verify: build + lint sau mỗi bước, Playwright thật (light + dark mode, mobile 390px, tablet 768px, keyboard Tab focus ring, `prefers-reduced-motion` emulation) — không chỉ dựa build pass.
+
+---
+
+## Rà soát yêu cầu đề bài (TV.docx) — kết quả audit
+
+Sau khi 12 module hoàn thành, đã đọc lại toàn bộ `TV.docx` và audit code thật (2 agent đọc trực tiếp code BE + FE, không suy đoán) để xác nhận mức độ đáp ứng đề bài. Đã sửa 2 gap quan trọng nhất (xem Module 8 ở trên: ranking/promotion theo Track). Các gap còn lại dưới đây **chưa sửa theo quyết định của user** (ưu tiên thời gian) — liệt kê để đưa vào báo cáo dưới dạng "known limitation", không phải bị bỏ sót.
+
+### Đã đáp ứng đúng đề (verify code thật)
+Role model, Event→Track→Round→Team→Submission→Score→Ranking→Prize, Auth JWT + tự phân loại FPT/External khi đăng ký, Submission qua URL + GitHub metadata, Score lưu riêng theo `(SubmissionId, JudgeUserId, CriterionId)` không gộp, toàn bộ bảng phân quyền Feature×Role trong đề (Join/Create Team, Submit Project chỉ Leader, Judge Submission chỉ Judge/Coordinator, Create Event/Assign Judges/Manage Criteria/Export chỉ Coordinator, View Submission/Ranking mọi role), Disqualify có lưu lý do, RBL export CSV ẩn danh + variance dashboard, Prize trao theo ranking + export CSV.
+
+### Đã sửa trong đợt review này
+- Ranking chỉ có theo Round → đã thêm theo Track (`?trackId=`) và theo Event (`GET /api/rankings/event/{eventId}`).
+- Promotion lấy top N toàn Round (sai so với "top N mỗi Hạng mục") → đã sửa group theo `Team.TrackId`.
+
+### Known limitations — chưa sửa (quyết định của user, ưu tiên thời gian)
+- ⚠️ **`IsApproved` không được enforce** ngoài trang duyệt tài khoản — user chưa được Coordinator duyệt vẫn tạo team/nộp bài/chấm điểm bình thường được, dù đề yêu cầu phải duyệt trước khi tham gia.
+- ⚠️ **Guest Judge không đăng nhập được** — `CreateGuestJudgeAsync` không set `PasswordHash` lẫn `GoogleId`, mà `LoginAsync` từ chối thẳng nếu thiếu mật khẩu.
+- ⚠️ **Audit log chỉ ghi `SUBMIT_SCORE`** — disqualify/promote/approve không được ghi log, dù đề yêu cầu log "tất cả hành động chấm điểm và loại bỏ".
+- ⚠️ **Team size chỉ chặn tối đa 5, không chặn tối thiểu 3** — đội 1-2 người vẫn nộp bài được.
+- ⚠️ **Vòng hiệu chuẩn (Calibration Round) cho RBL chưa xây** — chỉ có dashboard variance trên điểm thật đã chấm, chưa có cơ chế chấm bài mẫu trước khi chấm thật để giám khảo đồng thuận.
+- ⚠️ **Thông báo/công bố kết quả chưa xây** — `IEmailService` chỉ là 1 class rỗng, không có cơ chế notify/announce nào.
+- ⚠️ **Vai trò Mentor không có UI riêng** — Mentor đăng nhập thấy Dashboard y hệt Member, chỉ xuất hiện ở phía Coordinator (gán mentor cho Track).
+- Gap nhỏ, độ ưu tiên thấp: chỉ export CSV chưa có Excel (đề ghi "CSV/Excel", CSV nhiều khả năng đã đáp ứng); Criteria template không tự động copy vào event mới (Coordinator phải nhập tay lại); vài endpoint đọc (Criteria list, Ranking) không yêu cầu đăng nhập.

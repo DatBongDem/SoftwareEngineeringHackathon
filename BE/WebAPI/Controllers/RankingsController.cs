@@ -18,11 +18,25 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("round/{roundId}")]
-        public async Task<IActionResult> GetRoundRanking(string roundId)
+        public async Task<IActionResult> GetRoundRanking(string roundId, [FromQuery] string? trackId = null)
         {
             try
             {
-                var ranking = await _rankingService.CalculateRoundRankingAsync(roundId);
+                var ranking = await _rankingService.CalculateRoundRankingAsync(roundId, trackId);
+                return Ok(ranking);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("event/{eventId}")]
+        public async Task<IActionResult> GetEventRanking(string eventId)
+        {
+            try
+            {
+                var ranking = await _rankingService.CalculateEventRankingAsync(eventId);
                 return Ok(ranking);
             }
             catch (Exception ex)

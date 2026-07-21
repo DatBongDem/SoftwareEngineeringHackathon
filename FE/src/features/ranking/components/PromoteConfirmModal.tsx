@@ -24,8 +24,9 @@ export function PromoteConfirmModal({ roundId, eventId, topN, open, onClose }: P
         {promoteTopTeams.isError && <Alert tone="danger">{getErrorMessage(promoteTopTeams.error)}</Alert>}
         <Alert tone="warning">
           This promotes the top <span className="font-semibold tabular-nums">{topN}</span> non-disqualified
-          team{topN === 1 ? '' : 's'} by final weighted score to the next round. This cannot be undone from
-          here.
+          team{topN === 1 ? '' : 's'} <span className="font-semibold">within each Track</span> by final
+          weighted score to the next round (a round with multiple Tracks gets top {topN} promoted per
+          Track, not top {topN} overall). This cannot be undone from here.
         </Alert>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={onClose}>
@@ -33,7 +34,7 @@ export function PromoteConfirmModal({ roundId, eventId, topN, open, onClose }: P
           </Button>
           <Button onClick={handleConfirm} loading={promoteTopTeams.isPending}>
             <Award className="h-4 w-4" />
-            Promote top {topN}
+            Promote top {topN} per track
           </Button>
         </div>
       </div>

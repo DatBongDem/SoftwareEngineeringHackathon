@@ -7,7 +7,8 @@ namespace Application.Interfaces.Services
 {
     public interface IRankingService
     {
-        Task<List<TeamRankingDto>> CalculateRoundRankingAsync(string roundId);
+        Task<List<TeamRankingDto>> CalculateRoundRankingAsync(string roundId, string? trackId = null);
+        Task<List<EventRankingEntryDto>> CalculateEventRankingAsync(string eventId);
         Task<bool> PromoteTopTeamsAsync(string roundId);
         Task<Prize> CreatePrizeAsync(string eventId, CreatePrizeDto dto);
         Task<List<Prize>> GetPrizesByEventIdAsync(string eventId);

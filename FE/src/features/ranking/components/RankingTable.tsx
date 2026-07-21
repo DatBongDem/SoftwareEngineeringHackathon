@@ -1,10 +1,16 @@
 import { Award, Ban, Trophy } from 'lucide-react'
-import { Badge, Table } from '@/shared/components'
+import { Badge, Table, type TableColumn } from '@/shared/components'
 import type { TeamRanking } from '../types'
 
-export function RankingTable({ data }: { data: TeamRanking[] }) {
+interface RankingTableProps<T extends TeamRanking> {
+  data: T[]
+  /** Extra columns (e.g. Track, Round reached) inserted between Team and Score — used for the event-level view. */
+  extraColumns?: TableColumn<T>[]
+}
+
+export function RankingTable<T extends TeamRanking>({ data, extraColumns = [] }: RankingTableProps<T>) {
   return (
-    <Table<TeamRanking>
+    <Table<T>
       rows={data}
       rowKey={(row) => row.submissionId}
       columns={[
@@ -24,6 +30,7 @@ export function RankingTable({ data }: { data: TeamRanking[] }) {
           },
         },
         { header: 'Team', render: (row) => <span className="font-medium">{row.teamName}</span> },
+        ...extraColumns,
         {
           header: 'Score',
           render: (row) => (
