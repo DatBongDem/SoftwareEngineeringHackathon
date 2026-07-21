@@ -1,14 +1,17 @@
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import { useId, type InputHTMLAttributes, type ReactNode } from 'react'
 import { cn } from '@/shared/lib/cn'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   error?: string
   icon?: ReactNode
+  /** Rendered inside the field on the right, e.g. a show/hide password toggle. */
+  trailing?: ReactNode
 }
 
-export function Input({ label, error, icon, id, className, ...props }: InputProps) {
-  const inputId = id ?? props.name
+export function Input({ label, error, icon, trailing, id, className, ...props }: InputProps) {
+  const generatedId = useId()
+  const inputId = id ?? props.name ?? generatedId
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -29,11 +32,13 @@ export function Input({ label, error, icon, id, className, ...props }: InputProp
           className={cn(
             'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition-colors placeholder:text-slate-400 hover:border-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-600',
             Boolean(icon) && 'pl-9',
+            Boolean(trailing) && 'pr-9',
             error && 'border-rose-400 hover:border-rose-400 focus:border-rose-500 focus:ring-rose-500/20',
             className,
           )}
           {...props}
         />
+        {trailing && <span className="absolute inset-y-0 right-0 flex items-center pr-2">{trailing}</span>}
       </div>
       {error && <p className="text-xs text-rose-600">{error}</p>}
     </div>

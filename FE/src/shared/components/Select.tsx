@@ -1,4 +1,4 @@
-import type { SelectHTMLAttributes } from 'react'
+import { useId, type SelectHTMLAttributes } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/shared/lib/cn'
 
@@ -15,7 +15,8 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export function Select({ label, error, id, className, options, placeholder, ...props }: SelectProps) {
-  const selectId = id ?? props.name
+  const generatedId = useId()
+  const selectId = id ?? props.name ?? generatedId
 
   return (
     <div className="flex flex-col gap-1.5">

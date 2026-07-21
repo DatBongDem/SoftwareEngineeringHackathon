@@ -155,34 +155,36 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Role truy cập:** Tạo đội/Invite/Accept-Reject/Đăng ký track — **Team Leader**; Gửi join-request — **Team Member** (user chưa có đội); Xem danh sách đội theo Event/Track — **Coordinator**, **Mentor**.
 - **Phụ thuộc module khác:** Event (đội thuộc 1 event); Track (đăng ký đội vào track — dùng lại API list track từ Module 3); Auth (so `currentUserId` với `leaderUserId` để hiện đúng action).
 
+> Thiết kế lại "My Team Page" thành **tab "Teams" trong Event Detail** (giống Tracks/Rounds/Criteria) thay vì route riêng — vì Team luôn gắn với 1 Event, đặt tab ở đây nhất quán với 3 module trước và tránh route mồ côi không có event context. "Teams List by Event" (Coordinator/Mentor overview) dùng chung luôn tab này (mọi role xem được cùng danh sách, không tách trang riêng — BE không giới hạn role ở `GET /api/events/{eventId}/teams`).
+
 ### Trang/màn hình
-- [ ] My Team Page (nếu chưa có đội → hiện form tạo/tham gia; nếu có → hiện Team Detail)
-- [ ] Create Team Modal (Leader)
-- [ ] Team Detail Page (thông tin đội, danh sách thành viên + trạng thái `isAccepted`)
-- [ ] Invite Member Modal (Leader)
-- [ ] Join Requests Management (Leader — accept/reject request đang chờ)
-- [ ] Register Track Modal (Leader — chọn track từ danh sách của Module 3)
-- [ ] Teams List by Event/Track Page (Coordinator/Mentor xem tổng quan)
+- [x] My Team Page → hiện thực dưới dạng tab **Teams** trong `EventDetailPage` (`TeamsPanel`) — tự tạo đội nếu chưa có, hoặc "Request to join" trên đội bất kỳ trong event
+- [x] Create Team Modal (Leader)
+- [x] Team Detail Page (route `/teams/:teamId`, dùng thẳng `GET /api/teams/{id}` — không cần workaround `eventId` query param như Track vì BE có endpoint lấy 1 team)
+- [x] Invite Member Modal (Leader)
+- [x] Join Requests Management (Leader — Accept/Reject ngay trong Team Detail Page, badge "Pending" + 2 nút icon)
+- [x] Register Track Modal (Leader — chọn track từ danh sách Module 3)
+- [x] Teams List by Event/Track Page (Coordinator/Mentor xem tổng quan) → chính là tab Teams, mọi role xem chung
 
 ### Component chính
-- [ ] `TeamCard`, `MemberList`, `MemberStatusBadge` (map `TeamStatus` → label/màu, dùng `shared/types/enums.ts`)
-- [ ] `CreateTeamForm` (teamName, trackId tuỳ chọn)
-- [ ] `InviteMemberForm` (emailOrStudentId)
-- [ ] `JoinRequestList` + nút Accept/Reject
-- [ ] `RegisterTrackForm`
-- [ ] `JoinTeamButton` (gửi join-request)
-
-> Đã có sẵn slice đọc-only (`features/teams/types.ts`, `api/teamsApi.ts::getTeamsByTrack`, `useTeamsByTrack`) làm trước cho Track Detail Page ở Module 3 — chưa có CRUD (create/invite/join/accept/register-track) nào cả, vẫn còn nguyên trong module này.
+- [x] `TeamCard` (trong `TeamsPanel`), `MemberList`, `MemberStatusBadge` — dùng `teamStatusLabels`/`teamStatusTones` từ `shared/types/enums.ts`
+- [x] `CreateTeamForm` (teamName, trackId tuỳ chọn) — `CreateTeamModal`
+- [x] `InviteMemberForm` (emailOrStudentId) — `InviteMemberModal`
+- [x] `JoinRequestList` + nút Accept/Reject — inline trong `TeamDetailPage`
+- [x] `RegisterTrackForm` — `RegisterTrackModal`
+- [x] `JoinTeamButton` (gửi join-request) — nút "Request to join" trong `TeamsPanel` và `TeamDetailPage`
 
 ### API endpoint
-- `POST /api/teams`
-- `GET /api/teams/{id}`
-- `GET /api/events/{eventId}/teams`
+- [x] `POST /api/teams`
+- [x] `GET /api/teams/{id}`
+- [x] `GET /api/events/{eventId}/teams`
 - [x] `GET /api/tracks/{trackId}/teams` — đã dùng cho Track Detail Page (Module 3), chỉ đọc
-- `POST /api/teams/{teamId}/join-request`
-- `POST /api/teams/{teamId}/invite`
-- `PUT /api/teams/{teamId}/members/{userId}/accept?accept=true|false`
-- `POST /api/teams/{teamId}/register-track`
+- [x] `POST /api/teams/{teamId}/join-request`
+- [x] `POST /api/teams/{teamId}/invite`
+- [x] `PUT /api/teams/{teamId}/members/{userId}/accept?accept=true|false`
+- [x] `POST /api/teams/{teamId}/register-track`
+
+⚠️ **Phát hiện khi implement (đã fix, không phải gap còn tồn đọng):** `shared/components/Input.tsx`/`Select.tsx`/`Textarea.tsx` không tự sinh `id` khi component gọi không truyền `name`/`id` — khiến `<label htmlFor>` không liên kết được với input (ảnh hưởng screen reader, và khiến test tự động không thể `getByLabel`). Đã fix bằng `useId()` làm fallback, áp dụng ngay cho toàn bộ form trong app (Login/Register/mọi modal), không chỉ Module 5.
 
 ---
 
@@ -192,26 +194,30 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 - **Role truy cập:** Nộp bài/Sync GitHub — **Team Leader**; Xem — mọi role đã đăng nhập; Disqualify — **Coordinator**.
 - **Phụ thuộc module khác:** Team (chỉ leader của team mới nộp được, kiểm tra qua `AuthContext`); Event/Track/Round (submission gắn với 1 round, cần chọn round trước khi nộp — dùng lại data từ Module 2).
 
+> Thiết kế lại "Submit Project" thành **modal mở từ section "Submissions" trong Team Detail Page** (Module 5) thay vì trang riêng — nhất quán với cách Module 5 nhúng mọi action vào Team Detail thay vì route mồ côi. "Submissions List by Round" (Coordinator) dùng route riêng `/rounds/:roundId/submissions?eventId=` (cùng workaround query-param như Track Detail vì BE không có `GET /api/rounds/{id}` đơn lẻ), có link vào từ mỗi round card trong `RoundsPanel`.
+
 ### Trang/màn hình
-- [ ] Submit Project Page (Leader — trong ngữ cảnh 1 Round cụ thể)
-- [ ] Submission Detail Page (mọi role xem: repo/demo/report links, GitHub metadata)
-- [ ] Submissions List by Round/Event Page (Coordinator — tổng quan để disqualify)
-- [ ] Disqualify Modal (Coordinator, nhập lý do bắt buộc)
+- [x] Submit Project → modal `SubmitProjectModal` mở từ `TeamSubmissionsSection` trong Team Detail Page, chỉ hiện round chưa nộp (lọc theo `roundId` đã có submission)
+- [x] Submission Detail Page (route `/submissions/:submissionId`, dùng thẳng `GET /api/submissions/{id}` — có đủ `eventId`/`roundId`/`teamId` nên không cần workaround)
+- [x] Submissions List by Round Page (Coordinator — `RoundSubmissionsPage`, route `/rounds/:roundId/submissions?eventId=`) — bảng tổng quan, click vào team → Submission Detail để disqualify (không lặp lại modal ở 2 nơi)
+- [x] Disqualify Modal (Coordinator, nhập lý do bắt buộc) — mở từ Submission Detail Page
 
 ### Component chính
-- [ ] `SubmissionForm` (repoUrl, demoUrl?, reportUrl?, notes?)
-- [ ] `SubmissionCard`, `SubmissionList`
-- [ ] `GithubMetadataBadge` (stars/forks/language/openIssues/lastCommitDate)
-- [ ] `SyncGithubButton`
-- [ ] `DisqualifyForm` (reason bắt buộc)
+- [x] `SubmissionForm` (repoUrl, demoUrl?, reportUrl?, notes?) — `SubmitProjectModal`, có màn hình thành công animate (`animate-pop`) trước khi tự đóng
+- [x] `SubmissionCard`, `SubmissionList` — `TeamSubmissionsSection` (stagger fade-in-up từng card)
+- [x] `GithubMetadataBadge` → nâng cấp thành `GithubMetadataCard` (đẹp hơn plan gốc): 4 stat tile (stars/forks/issues/last commit) với icon màu riêng, dot màu theo ngôn ngữ (hash-based), stagger animation khi data vào
+- [x] `SyncGithubButton` — icon xoay khi đang sync
+- [x] `DisqualifyForm` (reason bắt buộc) — `DisqualifyModal`
 
 ### API endpoint
-- `POST /api/submissions`
-- `GET /api/submissions/{id}`
-- `GET /api/rounds/{roundId}/submissions`
-- `GET /api/events/{eventId}/submissions`
-- `POST /api/submissions/{id}/disqualify` *(Coordinator)*
-- `POST /api/submissions/{id}/sync-github`
+- [x] `POST /api/submissions`
+- [x] `GET /api/submissions/{id}`
+- [x] `GET /api/rounds/{roundId}/submissions`
+- [x] `GET /api/events/{eventId}/submissions`
+- [x] `POST /api/submissions/{id}/disqualify` *(Coordinator)*
+- [x] `POST /api/submissions/{id}/sync-github`
+
+⚠️ **Phát hiện khi implement:** `lucide-react` (bản đang dùng, v1.25) đã bỏ toàn bộ icon thương hiệu (`Github`, `Twitter`...) — dùng `FolderGit2` thay thế cho ngữ cảnh "GitHub repo". Đã verify `sync-github` hoạt động đúng với repo GitHub thật (`facebook/react`) — kéo về đúng số liệu sao/fork/issue/last-commit thật qua Playwright.
 
 ---
 
@@ -323,3 +329,17 @@ Nguồn nghiệp vụ: `TV.docx` (mô tả hệ thống SEAL — Software Engine
 
 ### API endpoint
 - `GET /api/auditlogs?eventId=` *(Coordinator)*
+
+---
+
+## UI/UX Design System — Redesign v3 "Academic Prestige" (hoàn thành)
+
+> Áp dụng sau Redesign v2 (elevation scale, focus ring, Skeleton, EmptyState theo ngữ cảnh — đã có từ trước). Redesign v3 thêm bản sắc thị giác riêng (font/màu không còn mặc định Tailwind) + chuyển động (scroll-reveal, count-up, stagger) + dark mode thật. Áp dụng cho toàn bộ trang đã build (Core, Auth, Event, Track, Criteria, Team, Submission, Admin); các module chưa build (Judging, Ranking, Prize, RBL, Audit Log) sẽ dùng design system này ngay từ đầu khi build.
+
+- [x] **Typography**: `@fontsource/lexend` (500/600/700, self-host) cho heading/hero/số liệu lớn qua `font-display` utility; `@fontsource/inter` (400–700) cho body/form/bảng qua `font-sans` (mặc định). Token khai báo trong `index.css` (`@theme { --font-sans; --font-display }`).
+- [x] **Bảng màu**: giữ indigo (action) / slate (neutral) / emerald-amber-rose (status), đậm thêm gradient hero (`indigo-700 → slate-900`), thêm **amber làm accent có chủ đích** (giải thưởng, "Active right now", "Your team") — không rải khắp nơi.
+- [x] **Dark mode thật**: `@custom-variant dark (&:where(.dark, .dark *))` trong `index.css` để `dark:` theo class `.dark` trên `<html>` thay vì chỉ theo OS. `shared/lib/theme.ts` + `shared/hooks/useTheme.ts` + `shared/components/ThemeToggle.tsx`, lưu `localStorage` (`seal_theme`), mặc định theo system preference. Gắn ở `MainLayout` (sidebar footer + mobile header) và `AuthLayout` (góc trên).
+- [x] **Count-up thật**: `Stat.tsx` đếm số 0→target bằng `requestAnimationFrame` (ease-out cubic) khi `value` là số; tôn trọng `prefers-reduced-motion` (nhảy thẳng tới target).
+- [x] **Scroll-reveal**: `shared/hooks/useInView.ts` (IntersectionObserver) + `shared/components/Reveal.tsx`, dùng `slide-in-from-bottom` đã có sẵn từ Module 6. Áp cho list/grid: Dashboard (stat cards, quick access), EventsListPage, TracksPanel, RoundsPanel, TeamsPanel, TeamDetailPage (member cards) — không áp cho từng dòng bảng (Table) để tránh rối mắt. Tôn trọng `prefers-reduced-motion` (hiện ngay, không animation).
+- [x] **WCAG AA fix thật phát hiện qua đo contrast**: `amber-600` trên nền trắng/`amber-50` chỉ đạt ~3.1–3.2:1 (< 4.5:1 yêu cầu cho text) — đổi sang `amber-700` (~4.8–5.0:1) ở `DashboardPage` (icon Stat) và `TeamsPanel` ("· Your team"). Dark mode variants (`amber-300`/`amber-400` trên nền tối) đã đạt >10:1, không cần đổi.
+- [x] Verify: build + lint sau mỗi bước, Playwright thật (light + dark mode, mobile 390px, tablet 768px, keyboard Tab focus ring, `prefers-reduced-motion` emulation) — không chỉ dựa build pass.

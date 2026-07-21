@@ -9,7 +9,7 @@ import {
   UserCog,
 } from 'lucide-react'
 import { useAuth } from '@/features/auth/context/AuthContext'
-import { Avatar, Badge } from '@/shared/components'
+import { Avatar, Badge, ThemeToggle } from '@/shared/components'
 import { cn } from '@/shared/lib/cn'
 
 const navItems = [
@@ -64,11 +64,13 @@ export function MainLayout() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 md:flex">
         <div className="flex items-center gap-2 px-5 py-5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-linear-to-br from-indigo-600 to-violet-600 text-white shadow-sm shadow-indigo-600/30">
-            <Trophy className="h-4.5 w-4.5" />
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-linear-to-br from-indigo-700 to-slate-900 text-white shadow-sm shadow-indigo-900/30">
+            <Trophy className="h-4.5 w-4.5 text-amber-400" />
           </span>
           <div className="leading-tight">
-            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">SEAL Hackathon</p>
+            <p className="font-display text-sm font-semibold text-slate-900 dark:text-slate-100">
+              SEAL Hackathon
+            </p>
             <p className="text-xs text-slate-400">Management System</p>
           </div>
         </div>
@@ -90,6 +92,11 @@ export function MainLayout() {
           )}
         </nav>
 
+        <div className="flex items-center justify-between border-t border-slate-200 px-3 py-2 dark:border-slate-800">
+          <span className="text-xs font-medium text-slate-400">Theme</span>
+          <ThemeToggle />
+        </div>
+
         <div className="border-t border-slate-200 p-3 dark:border-slate-800">
           <div className="flex items-center gap-3 rounded-lg p-2">
             <Avatar name={user?.fullName ?? ''} />
@@ -109,14 +116,19 @@ export function MainLayout() {
       <header className="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 md:hidden">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-indigo-600 to-violet-600 text-white">
-              <Trophy className="h-4 w-4" />
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-indigo-700 to-slate-900 text-white">
+              <Trophy className="h-4 w-4 text-amber-400" />
             </span>
-            <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">SEAL Hackathon</span>
+            <span className="font-display text-sm font-semibold text-slate-900 dark:text-slate-100">
+              SEAL Hackathon
+            </span>
           </div>
-          <button onClick={logout} aria-label="Log out" className={logoutButtonClass}>
-            <LogOut className="h-4 w-4" />
-          </button>
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <button onClick={logout} aria-label="Log out" className={logoutButtonClass}>
+              <LogOut className="h-4 w-4" />
+            </button>
+          </div>
         </div>
         <nav className="flex gap-1 overflow-x-auto border-t border-slate-100 px-3 py-2 dark:border-slate-800">
           {[...navItems, ...(isCoordinator ? adminNavItems : [])].map((item) => (

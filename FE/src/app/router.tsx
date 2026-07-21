@@ -14,6 +14,9 @@ import { GuestJudgePage } from '@/features/auth/pages/GuestJudgePage'
 import { EventsListPage } from '@/features/events/pages/EventsListPage'
 import { EventDetailPage } from '@/features/events/pages/EventDetailPage'
 import { TrackDetailPage } from '@/features/tracks/pages/TrackDetailPage'
+import { TeamDetailPage } from '@/features/teams/pages/TeamDetailPage'
+import { SubmissionDetailPage } from '@/features/submissions/pages/SubmissionDetailPage'
+import { RoundSubmissionsPage } from '@/features/submissions/pages/RoundSubmissionsPage'
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +30,9 @@ export const router = createBrowserRouter([
           { path: 'events', element: <EventsListPage /> },
           { path: 'events/:eventId', element: <EventDetailPage /> },
           { path: 'tracks/:trackId', element: <TrackDetailPage /> },
+          { path: 'teams/:teamId', element: <TeamDetailPage /> },
+          { path: 'submissions/:submissionId', element: <SubmissionDetailPage /> },
+          { path: 'rounds/:roundId/submissions', element: <RoundSubmissionsPage /> },
           {
             element: <RoleRoute allowedRoles={['Coordinator']} />,
             children: [

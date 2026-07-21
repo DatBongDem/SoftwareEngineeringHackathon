@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, CalendarClock, ListChecks, Medal, Users } from 'lucide-react'
+import { ArrowLeft, CalendarClock, ListChecks, Medal, Users, UsersRound } from 'lucide-react'
 import { useEvent } from '../hooks/useEvent'
 import { RoundsPanel } from '../components/RoundsPanel'
 import { TracksPanel } from '@/features/tracks/components/TracksPanel'
 import { CriteriaPanel } from '@/features/criteria/components/CriteriaPanel'
+import { TeamsPanel } from '@/features/teams/components/TeamsPanel'
 import { Alert, Badge, Card, Spinner } from '@/shared/components'
 import { cn } from '@/shared/lib/cn'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
-type Tab = 'tracks' | 'rounds' | 'criteria'
+type Tab = 'tracks' | 'rounds' | 'criteria' | 'teams'
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'tracks', label: 'Tracks', icon: Users },
   { id: 'rounds', label: 'Rounds', icon: Medal },
   { id: 'criteria', label: 'Criteria', icon: ListChecks },
+  { id: 'teams', label: 'Teams', icon: UsersRound },
 ]
 
 export function EventDetailPage() {
@@ -36,7 +38,9 @@ export function EventDetailPage() {
           <ArrowLeft className="h-3.5 w-3.5" /> Back to events
         </Link>
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{event.title}</h1>
+          <h1 className="font-display text-2xl font-semibold text-slate-900 dark:text-slate-100">
+            {event.title}
+          </h1>
           <Badge tone={event.isActive ? 'success' : 'neutral'} dot>
             {event.isActive ? 'Active' : 'Inactive'}
           </Badge>
@@ -62,7 +66,7 @@ export function EventDetailPage() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              'flex items-center gap-1.5 border-b-2 px-4 py-2 text-sm font-medium transition-colors',
+              'flex items-center gap-1.5 border-b-2 px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900',
               activeTab === tab.id
                 ? 'border-indigo-600 text-indigo-600'
                 : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200',
@@ -77,6 +81,7 @@ export function EventDetailPage() {
       {activeTab === 'tracks' && <TracksPanel eventId={event.id} />}
       {activeTab === 'rounds' && <RoundsPanel eventId={event.id} />}
       {activeTab === 'criteria' && <CriteriaPanel eventId={event.id} />}
+      {activeTab === 'teams' && <TeamsPanel eventId={event.id} />}
     </div>
   )
 }
