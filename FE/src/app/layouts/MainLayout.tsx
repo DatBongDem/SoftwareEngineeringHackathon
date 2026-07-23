@@ -77,7 +77,7 @@ export function MainLayout() {
             <p className="font-display text-sm font-semibold text-slate-900 dark:text-slate-100">
               SEAL Hackathon
             </p>
-            <p className="text-xs text-slate-400">Management System</p>
+            <p className="text-xs text-slate-500">Management System</p>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export function MainLayout() {
 
           {isCoordinator && (
             <>
-              <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Coordinator
               </p>
               {adminNavItems.map((item) => (
@@ -102,7 +102,7 @@ export function MainLayout() {
         </nav>
 
         <div className="flex items-center justify-between border-t border-slate-200 px-3 py-2 dark:border-slate-800">
-          <span className="text-xs font-medium text-slate-400">Theme</span>
+          <span className="text-xs font-medium text-slate-500">Theme</span>
           <ThemeToggle />
         </div>
 
@@ -113,7 +113,7 @@ export function MainLayout() {
               <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
                 {user?.fullName}
               </p>
-              <p className="truncate text-xs text-slate-400">{user?.email}</p>
+              <p className="truncate text-xs text-slate-500">{user?.email}</p>
             </div>
             <button onClick={logout} aria-label="Log out" className={logoutButtonClass}>
               <LogOut className="h-4 w-4" />

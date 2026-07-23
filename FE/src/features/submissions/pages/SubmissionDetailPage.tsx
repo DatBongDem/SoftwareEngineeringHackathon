@@ -114,7 +114,7 @@ export function SubmissionDetailPage() {
         </Card>
       )}
 
-      <p className="text-xs text-slate-400">
+      <p className="text-xs text-slate-500">
         Submitted {new Date(submission.submittedAt).toLocaleString()}
       </p>
 

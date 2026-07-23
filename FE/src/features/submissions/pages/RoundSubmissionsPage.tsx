@@ -3,7 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useRounds } from '@/features/events/hooks/useRounds'
 import { useTeamsByEvent } from '@/features/teams/hooks/useTeamsByEvent'
 import { useSubmissionsByRound } from '../hooks/useSubmissionsByRound'
-import { Alert, Badge, EmptyState, PageHeader, Table, TableSkeleton } from '@/shared/components'
+import { Alert, Badge, EmptyState, MissingEventContextAlert, PageHeader, Table, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 import type { Submission } from '../types'
 
@@ -21,9 +21,7 @@ export function RoundSubmissionsPage() {
 
   if (!eventId) {
     return (
-      <Alert tone="warning">
-        Missing event context — open this page from the event's Rounds tab instead of a direct link.
-      </Alert>
+      <MissingEventContextAlert message="Missing event context — open this page from the event's Rounds tab instead of a direct link." />
     )
   }
 

@@ -8,7 +8,7 @@ import { useEventCriteria } from '@/features/criteria/hooks/useEventCriteria'
 import { useSubmissionsByRound } from '@/features/submissions/hooks/useSubmissionsByRound'
 import { useSubmissionScores } from '../hooks/useSubmissionScores'
 import { ScoreModal } from '../components/ScoreModal'
-import { Alert, Badge, Button, buttonClassName, Card, EmptyState, PageHeader, Reveal, Skeleton } from '@/shared/components'
+import { Alert, Badge, Button, buttonClassName, Card, EmptyState, MissingEventContextAlert, PageHeader, Reveal, Skeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 import type { Submission } from '@/features/submissions/types'
 
@@ -17,7 +17,7 @@ function ScoreStatusBadge({ submissionId, criteriaCount }: { submissionId: strin
   const { data: scores } = useSubmissionScores(submissionId)
   const myScores = scores?.filter((s) => s.judgeUserId === user?.id) ?? []
 
-  if (!scores) return <span className="text-xs text-slate-400">Checking…</span>
+  if (!scores) return <span className="text-xs text-slate-500">Checking…</span>
   if (myScores.length === 0) {
     return (
       <Badge tone="warning" dot>
@@ -59,9 +59,7 @@ export function RoundJudgingPage() {
 
   if (!eventId) {
     return (
-      <Alert tone="warning">
-        Missing event context — open this page from a round's judging link instead of a direct URL.
-      </Alert>
+      <MissingEventContextAlert message="Missing event context — open this page from a round's judging link instead of a direct URL." />
     )
   }
 

@@ -71,7 +71,7 @@ export function EventsListPage() {
                       {event.description}
                     </p>
                   </div>
-                  <p className="mt-auto text-xs font-medium text-slate-400">
+                  <p className="mt-auto text-xs font-medium text-slate-500">
                     {event.term} {event.academicYear}
                   </p>
                 </Card>

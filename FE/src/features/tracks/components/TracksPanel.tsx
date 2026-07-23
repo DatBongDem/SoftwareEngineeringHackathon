@@ -51,7 +51,7 @@ export function TracksPanel({ eventId }: { eventId: string }) {
                   </Badge>
                 </div>
                 <p className="text-sm text-slate-500 dark:text-slate-400">{track.description}</p>
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                <div className="flex items-center gap-1.5 text-xs text-slate-500">
                   <GraduationCap className="h-3.5 w-3.5" />
                   {track.mentorUserIds.length > 0
                     ? `${track.mentorUserIds.length} mentor(s) assigned`

@@ -5,7 +5,7 @@ import { userTypeLabels } from '@/shared/types/enums'
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="text-xs font-medium uppercase tracking-wide text-slate-400">{label}</span>
+      <span className="text-xs font-medium uppercase tracking-wide text-slate-500">{label}</span>
       <span className="text-sm text-slate-800 dark:text-slate-200">{value}</span>
     </div>
   )
@@ -39,7 +39,7 @@ export function ProfilePage() {
           {user.universityName && <Field label="University" value={user.universityName} />}
 
           <div className="flex flex-col gap-1.5 sm:col-span-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-slate-400">Roles</span>
+            <span className="text-xs font-medium uppercase tracking-wide text-slate-500">Roles</span>
             <div className="flex flex-wrap gap-2">
               {user.roles.map((role) => (
                 <Badge key={role} tone="info">

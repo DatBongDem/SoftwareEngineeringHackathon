@@ -3,7 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useRounds } from '@/features/events/hooks/useRounds'
 import { useCalibrationVariance } from '../hooks/useCalibrationVariance'
 import { VarianceTable } from '../components/VarianceTable'
-import { Alert, EmptyState, PageHeader, TableSkeleton } from '@/shared/components'
+import { Alert, EmptyState, MissingEventContextAlert, PageHeader, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
 export function CalibrationDashboardPage() {
@@ -18,9 +18,7 @@ export function CalibrationDashboardPage() {
 
   if (!eventId) {
     return (
-      <Alert tone="warning">
-        Missing event context — open this page from a round's judging link instead of a direct URL.
-      </Alert>
+      <MissingEventContextAlert message="Missing event context — open this page from a round's judging link instead of a direct URL." />
     )
   }
 

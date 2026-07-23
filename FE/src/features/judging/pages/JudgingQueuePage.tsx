@@ -29,7 +29,7 @@ export function JudgingQueuePage() {
                   </span>
                   <div>
                     <p className="font-medium text-slate-900 dark:text-slate-100">{round.name}</p>
-                    <p className="text-xs text-slate-400">{event.title}</p>
+                    <p className="text-xs text-slate-500">{event.title}</p>
                   </div>
                 </div>
                 <div className="mt-auto flex items-center gap-2 pt-1">

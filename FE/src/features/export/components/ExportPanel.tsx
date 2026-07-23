@@ -27,7 +27,7 @@ export function ExportPanel({ eventId }: { eventId: string }) {
       </Card>
 
       <div>
-        <h2 className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase">
+        <h2 className="mb-3 text-sm font-semibold tracking-wide text-slate-500 uppercase">
           Round rankings
         </h2>
 

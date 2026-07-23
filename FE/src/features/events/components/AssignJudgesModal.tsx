@@ -41,8 +41,7 @@ export function AssignJudgesModal({
         {assignJudges.isError && <Alert tone="danger">{getErrorMessage(assignJudges.error)}</Alert>}
 
         <Alert tone="warning">
-          The backend doesn't expose an endpoint to list users by role yet, so judge user IDs must be
-          entered manually — grab them from the Pending Approvals page or the user's own login response.
+          Enter judge user IDs manually — copy them from the Pending Approvals page.
         </Alert>
 
         <Textarea

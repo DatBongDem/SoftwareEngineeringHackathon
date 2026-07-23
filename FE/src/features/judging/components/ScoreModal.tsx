@@ -102,7 +102,7 @@ export function ScoreModal({ submissionId, roundId, criteria, teamName, open, on
             >
               <div className="flex items-baseline justify-between gap-2">
                 <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{criterion.name}</p>
-                <span className="shrink-0 text-xs text-slate-400 tabular-nums">
+                <span className="shrink-0 text-xs text-slate-500 tabular-nums">
                   weight {criterion.weight} · max {criterion.maxScore}
                 </span>
               </div>

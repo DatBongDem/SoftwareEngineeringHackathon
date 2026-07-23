@@ -23,10 +23,8 @@ export function AuditLogPanel({ eventId }: { eventId: string }) {
   return (
     <div className="flex flex-col gap-4 pt-4">
       <Alert tone="info">
-        The backend currently only logs the <span className="font-mono">SUBMIT_SCORE</span> action, even
-        though disqualify/promote/approve are meant to be logged too — this table shows exactly what the
-        API returns. It also doesn't expose a "get user by ID" endpoint yet, so "Performed by" shows the
-        raw user ID rather than a name.
+        Only scoring actions are logged today — disqualify/promote/approve will appear here in a future
+        update. "Performed by" shows the raw user ID rather than a name.
       </Alert>
 
       {error && <Alert tone="danger">{getErrorMessage(error)}</Alert>}

@@ -4,10 +4,10 @@ import { ThemeToggle } from '@/shared/components'
 import { cn } from '@/shared/lib/cn'
 
 const highlights = [
-  { icon: Trophy, text: 'Ba mùa Hackathon mỗi năm: Spring, Summer, Fall', accent: true },
-  { icon: Users, text: 'Đội thi 3–5 thành viên, mở cho SV FPT và các trường đối tác' },
-  { icon: Gavel, text: 'Chấm điểm minh bạch theo tiêu chí, có nhật ký kiểm tra' },
-  { icon: ShieldCheck, text: 'Xếp hạng, thăng vòng và trao giải tự động' },
+  { icon: Trophy, text: 'Three hackathon seasons a year: Spring, Summer, Fall', accent: true },
+  { icon: Users, text: 'Teams of 3–5 members, open to FPT students and partner universities' },
+  { icon: Gavel, text: 'Transparent criteria-based scoring with a full audit trail' },
+  { icon: ShieldCheck, text: 'Automated ranking, promotion, and prize awarding' },
 ]
 
 const heroCopy = {
@@ -20,18 +20,18 @@ const heroCopy = {
       </>
     ),
     description:
-      'Nền tảng quản lý cuộc thi hackathon học thuật của Khoa Kỹ thuật Phần mềm, phối hợp cùng PDP — Trường Đại học FPT TP.HCM.',
+      "The academic hackathon management platform run by the Software Engineering Department, in partnership with PDP — FPT University HCMC.",
   },
   register: {
     headline: (
       <>
-        Bắt đầu hành trình
+        Start your
         <br />
-        Hackathon của bạn
+        Hackathon journey
       </>
     ),
     description:
-      'Tạo tài khoản để lập đội, đăng ký hạng mục thi, nộp bài và theo dõi kết quả chấm điểm — chỉ mất một phút.',
+      'Create an account to form a team, register for a track, submit your project, and track your scoring results — it only takes a minute.',
   },
 }
 
@@ -97,7 +97,7 @@ export function AuthLayout() {
           </div>
         </div>
 
-        <p className="relative pb-6 text-center text-xs text-slate-400 dark:text-slate-500">
+        <p className="relative pb-6 text-center text-xs text-slate-500 dark:text-slate-400">
           © {new Date().getFullYear()} SEAL — FPT University HCMC
         </p>
       </div>

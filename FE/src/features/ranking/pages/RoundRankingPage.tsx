@@ -7,7 +7,7 @@ import { useTracks } from '@/features/tracks/hooks/useTracks'
 import { useRoundRanking } from '../hooks/useRoundRanking'
 import { RankingTable } from '../components/RankingTable'
 import { PromoteConfirmModal } from '../components/PromoteConfirmModal'
-import { Alert, Button, EmptyState, PageHeader, Select, TableSkeleton } from '@/shared/components'
+import { Alert, Button, EmptyState, MissingEventContextAlert, PageHeader, Select, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
 export function RoundRankingPage() {
@@ -27,9 +27,7 @@ export function RoundRankingPage() {
 
   if (!eventId) {
     return (
-      <Alert tone="warning">
-        Missing event context — open this page from a round's ranking link instead of a direct URL.
-      </Alert>
+      <MissingEventContextAlert message="Missing event context — open this page from a round's ranking link instead of a direct URL." />
     )
   }
 

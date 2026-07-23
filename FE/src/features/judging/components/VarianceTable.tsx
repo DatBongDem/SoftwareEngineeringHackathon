@@ -1,5 +1,6 @@
 import { AlertTriangle } from 'lucide-react'
 import { Badge, Table } from '@/shared/components'
+import { formatScore } from '@/shared/lib/formatScore'
 import type { CriterionVariance } from '../types'
 
 // Flags a criterion as "High variance" when judges disagree noticeably more
@@ -19,15 +20,18 @@ export function VarianceTable({ data }: { data: CriterionVariance[] }) {
       rowKey={(row) => row.criterionId}
       columns={[
         { header: 'Criterion', render: (row) => <span className="font-medium">{row.criterionName}</span> },
-        { header: 'Mean', render: (row) => <span className="tabular-nums">{row.meanScore}</span> },
-        { header: 'Std dev', render: (row) => <span className="tabular-nums">{row.standardDeviation}</span> },
-        { header: 'Variance', render: (row) => <span className="tabular-nums">{row.variance}</span> },
+        { header: 'Mean', render: (row) => <span className="tabular-nums">{formatScore(row.meanScore)}</span> },
+        {
+          header: 'Std dev',
+          render: (row) => <span className="tabular-nums">{formatScore(row.standardDeviation)}</span>,
+        },
+        { header: 'Variance', render: (row) => <span className="tabular-nums">{formatScore(row.variance)}</span> },
         { header: 'Judges', render: (row) => <span className="tabular-nums">{row.totalJudges}</span> },
         {
           header: 'Calibration',
           render: (row) => {
             if (row.totalJudges < 2) {
-              return <span className="text-xs text-slate-400">Not enough data</span>
+              return <span className="text-xs text-slate-500">Not enough data</span>
             }
             if (row.standardDeviation > 0 && row.standardDeviation > highVarianceThreshold) {
               return (

@@ -1,7 +1,7 @@
 import { Check, UserCheck } from 'lucide-react'
 import { usePendingUsers } from '../hooks/usePendingUsers'
 import { useApproveUser } from '../hooks/useApproveUser'
-import { Alert, Avatar, Badge, Button, EmptyState, PageHeader, Table, TableSkeleton } from '@/shared/components'
+import { Alert, Avatar, Badge, Button, CopyIdButton, EmptyState, PageHeader, Table, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 import { userTypeLabels } from '@/shared/types/enums'
 import type { CurrentUser } from '../types'
@@ -42,7 +42,7 @@ export function PendingUsersPage() {
                   <Avatar name={row.fullName} size="sm" />
                   <div>
                     <p className="font-medium text-slate-900 dark:text-slate-100">{row.fullName}</p>
-                    <p className="text-xs text-slate-400">{row.email}</p>
+                    <p className="text-xs text-slate-500">{row.email}</p>
                   </div>
                 </div>
               ),
@@ -67,15 +67,18 @@ export function PendingUsersPage() {
             {
               header: '',
               render: (row) => (
-                <Button
-                  variant="primary"
-                  size="sm"
-                  loading={approveUser.isPending && approveUser.variables === row.id}
-                  onClick={() => approveUser.mutate(row.id)}
-                >
-                  <Check className="h-3.5 w-3.5" />
-                  Approve
-                </Button>
+                <div className="flex items-center gap-2">
+                  <CopyIdButton value={row.id} />
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    loading={approveUser.isPending && approveUser.variables === row.id}
+                    onClick={() => approveUser.mutate(row.id)}
+                  >
+                    <Check className="h-3.5 w-3.5" />
+                    Approve
+                  </Button>
+                </div>
               ),
             },
           ]}

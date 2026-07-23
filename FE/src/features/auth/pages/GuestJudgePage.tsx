@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Mail, ShieldPlus, User } from 'lucide-react'
 import { useCreateGuestJudge } from '../hooks/useCreateGuestJudge'
-import { Alert, Button, Card, Input, PageHeader } from '@/shared/components'
+import { Alert, Button, Card, CopyIdButton, Input, PageHeader } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
 export function GuestJudgePage() {
@@ -38,9 +38,17 @@ export function GuestJudgePage() {
           {mutation.isError && <Alert tone="danger">{getErrorMessage(mutation.error)}</Alert>}
           {mutation.isSuccess && (
             <Alert tone="success">
-              Guest judge account created for {mutation.data.fullName}. Note: the backend doesn't set a
-              password for guest judges yet, so they can't log in until that's added — track scoring
-              access for them manually in the meantime.
+              <div className="flex flex-col gap-2">
+                <p>
+                  Guest judge account created for{' '}
+                  <span className="font-medium">{mutation.data.fullName}</span>. They can't log in
+                  yet — assign scoring access manually.
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs">{mutation.data.id}</span>
+                  <CopyIdButton value={mutation.data.id} />
+                </div>
+              </div>
             </Alert>
           )}
 

@@ -116,7 +116,7 @@ export function TeamDetailPage() {
                     </Badge>
                   )}
                 </p>
-                <p className="text-xs text-slate-400">{member.email}</p>
+                <p className="text-xs text-slate-500">{member.email}</p>
               </div>
             </Card>
           </Reveal>
@@ -128,7 +128,7 @@ export function TeamDetailPage() {
               <Avatar name={member.fullName} size="sm" />
               <div className="flex-1">
                 <p className="font-medium text-slate-900 dark:text-slate-100">{member.fullName}</p>
-                <p className="text-xs text-slate-400">{member.email}</p>
+                <p className="text-xs text-slate-500">{member.email}</p>
               </div>
               <Badge tone="warning" dot>
                 Pending
@@ -138,6 +138,7 @@ export function TeamDetailPage() {
                   <Button
                     variant="secondary"
                     size="sm"
+                    className="min-h-9 min-w-9"
                     aria-label={`Accept ${member.fullName}`}
                     loading={acceptMember.isPending && acceptMember.variables?.userId === member.userId && acceptMember.variables.accept}
                     onClick={() => acceptMember.mutate({ userId: member.userId, accept: true })}
@@ -147,6 +148,7 @@ export function TeamDetailPage() {
                   <Button
                     variant="danger"
                     size="sm"
+                    className="min-h-9 min-w-9"
                     aria-label={`Reject ${member.fullName}`}
                     loading={acceptMember.isPending && acceptMember.variables?.userId === member.userId && !acceptMember.variables.accept}
                     onClick={() => acceptMember.mutate({ userId: member.userId, accept: false })}

@@ -1,5 +1,6 @@
 import { Award, Ban, Trophy } from 'lucide-react'
 import { Badge, Table, type TableColumn } from '@/shared/components'
+import { formatScore } from '@/shared/lib/formatScore'
 import type { TeamRanking } from '../types'
 
 interface RankingTableProps<T extends TeamRanking> {
@@ -17,7 +18,7 @@ export function RankingTable<T extends TeamRanking>({ data, extraColumns = [] }:
         {
           header: 'Rank',
           render: (row) => {
-            if (row.isDisqualified) return <span className="text-slate-400">—</span>
+            if (row.isDisqualified) return <span className="text-slate-500">—</span>
             if (row.rank === 1) {
               return (
                 <span className="inline-flex items-center gap-1.5 font-display font-bold text-amber-600 dark:text-amber-400">
@@ -35,7 +36,7 @@ export function RankingTable<T extends TeamRanking>({ data, extraColumns = [] }:
           header: 'Score',
           render: (row) => (
             <span className="font-display font-semibold tabular-nums text-slate-900 dark:text-slate-100">
-              {row.isDisqualified ? '—' : row.finalWeightedScore}
+              {row.isDisqualified ? '—' : formatScore(row.finalWeightedScore)}
             </span>
           ),
         },
@@ -56,7 +57,7 @@ export function RankingTable<T extends TeamRanking>({ data, extraColumns = [] }:
                 </Badge>
               )
             }
-            return <span className="text-xs text-slate-400">—</span>
+            return <span className="text-xs text-slate-500">—</span>
           },
         },
       ]}

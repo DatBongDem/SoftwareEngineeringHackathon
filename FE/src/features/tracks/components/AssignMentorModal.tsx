@@ -36,8 +36,7 @@ export function AssignMentorModal({
         {assignMentor.isError && <Alert tone="danger">{getErrorMessage(assignMentor.error)}</Alert>}
 
         <Alert tone="warning">
-          The backend doesn't expose an endpoint to list users by role yet, so the mentor's user ID must
-          be entered manually.
+          Enter the mentor's user ID manually — copy it from the Pending Approvals page.
         </Alert>
 
         <Input

@@ -84,7 +84,7 @@ export function DashboardPage() {
       </div>
 
       <div>
-        <h2 className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase">Quick access</h2>
+        <h2 className="mb-3 text-sm font-semibold tracking-wide text-slate-500 uppercase">Quick access</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[...quickLinks, ...(isCoordinator ? adminLinks : [])].map(({ to, label, description, icon: Icon }, i) => (
             <Reveal key={to} delayMs={i * 60} className="h-full">

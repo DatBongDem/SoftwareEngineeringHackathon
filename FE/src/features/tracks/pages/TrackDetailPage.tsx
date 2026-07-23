@@ -2,7 +2,7 @@ import { ArrowLeft, Users } from 'lucide-react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useTracks } from '../hooks/useTracks'
 import { useTeamsByTrack } from '@/features/teams/hooks/useTeamsByTrack'
-import { Alert, Badge, Card, EmptyState, Spinner, Table, TableSkeleton } from '@/shared/components'
+import { Alert, Badge, Card, EmptyState, MissingEventContextAlert, Spinner, Table, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 import { teamStatusLabels, teamStatusTones } from '@/shared/types/enums'
 import type { Team } from '@/features/teams/types'
@@ -19,10 +19,7 @@ export function TrackDetailPage() {
 
   if (!eventId) {
     return (
-      <Alert tone="warning">
-        Missing event context for this track — open it from the event's Tracks tab instead of a direct
-        link (the backend has no standalone "get track by ID" endpoint yet).
-      </Alert>
+      <MissingEventContextAlert message="Missing event context for this track — open it from the event's Tracks tab instead of a direct link." />
     )
   }
 
