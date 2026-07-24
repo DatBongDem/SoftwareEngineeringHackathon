@@ -9,6 +9,7 @@ namespace Application.Features.Submissions
         public string? DemoUrl { get; set; }
         public string? ReportUrl { get; set; }
         public string? Notes { get; set; }
+        public bool IsCalibration { get; set; }
     }
 
     public class DisqualifySubmissionDto

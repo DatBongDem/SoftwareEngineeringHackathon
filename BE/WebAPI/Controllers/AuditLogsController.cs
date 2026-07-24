@@ -7,6 +7,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "ApprovedUser")]
     [Authorize(Roles = "Coordinator")]
     public class AuditLogsController : ControllerBase
     {

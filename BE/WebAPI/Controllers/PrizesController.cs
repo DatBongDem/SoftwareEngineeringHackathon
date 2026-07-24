@@ -8,6 +8,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "ApprovedUser")]
     public class PrizesController : ControllerBase
     {
         private readonly IRankingService _rankingService;

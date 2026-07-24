@@ -14,6 +14,7 @@ namespace Application.DependencyInjection
             services.AddScoped<ISubmissionService, SubmissionService>();
             services.AddScoped<IScoringService, ScoringService>();
             services.AddScoped<IRankingService, RankingService>();
+            services.AddScoped<INotificationService, NotificationService>();
             return services;
         }
     }

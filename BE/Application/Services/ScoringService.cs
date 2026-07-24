@@ -15,17 +15,23 @@ namespace Application.Services
         private readonly ISubmissionRepository _submissionRepository;
         private readonly IEventRepository _eventRepository;
         private readonly IAuditLogRepository _auditLogRepository;
+        private readonly ITeamRepository _teamRepository;
+        private readonly INotificationRepository _notificationRepository;
 
         public ScoringService(
             IScoreRepository scoreRepository,
             ISubmissionRepository submissionRepository,
             IEventRepository eventRepository,
-            IAuditLogRepository auditLogRepository)
+            IAuditLogRepository auditLogRepository,
+            ITeamRepository teamRepository,
+            INotificationRepository notificationRepository)
         {
             _scoreRepository = scoreRepository;
             _submissionRepository = submissionRepository;
             _eventRepository = eventRepository;
             _auditLogRepository = auditLogRepository;
+            _teamRepository = teamRepository;
+            _notificationRepository = notificationRepository;
         }
 
         public async Task<bool> SubmitScoresAsync(string judgeUserId, SubmitScoreDto dto)
@@ -50,6 +56,43 @@ namespace Application.Services
             }).ToList();
 
             await _scoreRepository.CreateOrUpdateScoresAsync(scoresToSave);
+
+            // Send Notification to Team Members
+            try
+            {
+                var team = await _teamRepository.GetByIdAsync(submission.TeamId);
+                if (team != null)
+                {
+                    var msg = $"Giám khảo đã nhập điểm số mới cho bài nộp của đội {team.TeamName}!";
+                    await _notificationRepository.CreateAsync(new Notification
+                    {
+                        UserId = team.LeaderUserId,
+                        Message = msg,
+                        Type = "Scoring",
+                        IsRead = false,
+                        CreatedAt = DateTime.UtcNow
+                    });
+
+                    foreach (var member in team.Members)
+                    {
+                        if (member.IsAccepted && member.UserId != team.LeaderUserId)
+                        {
+                            await _notificationRepository.CreateAsync(new Notification
+                            {
+                                UserId = member.UserId,
+                                Message = msg,
+                                Type = "Scoring",
+                                IsRead = false,
+                                CreatedAt = DateTime.UtcNow
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Silence notification error to not fail scoring operation
+            }
 
             // Write Audit Log
             await _auditLogRepository.LogAsync(new AuditLog
@@ -76,47 +119,71 @@ namespace Application.Services
 
             var allScoresInRound = await _scoreRepository.GetScoresByRoundIdAsync(roundId);
             var criteriaList = await _eventRepository.GetCriteriaByEventIdAsync(round.EventId);
+            var criteriaDict = criteriaList.ToDictionary(c => c.Id, c => c.Name);
+
+            var submissions = await _submissionRepository.GetSubmissionsByRoundIdAsync(roundId);
+            var targetSubmissions = submissions.Where(s => s.IsCalibration).ToList();
+            if (targetSubmissions.Count == 0)
+            {
+                targetSubmissions = submissions; // Fallback to all if none explicitly marked
+            }
 
             var result = new CalibrationResultDto
             {
                 RoundId = roundId,
-                CriteriaVariances = new List<CriterionVarianceDto>()
+                SubmissionsVariances = new List<CalibrationSubmissionVarianceDto>()
             };
 
-            foreach (var critId in round.CriteriaIds)
+            foreach (var sub in targetSubmissions)
             {
-                var criterion = criteriaList.FirstOrDefault(c => c.Id == critId);
-                var critName = criterion?.Name ?? "Criterion " + critId;
+                var team = await _teamRepository.GetByIdAsync(sub.TeamId);
+                var teamName = team?.TeamName ?? "Team " + sub.TeamId;
 
-                var critScores = allScoresInRound.Where(s => s.CriterionId == critId).Select(s => s.ScoreValue).ToList();
-                if (critScores.Count == 0)
+                var subVariance = new CalibrationSubmissionVarianceDto
                 {
-                    result.CriteriaVariances.Add(new CriterionVarianceDto
+                    SubmissionId = sub.Id,
+                    TeamName = teamName,
+                    CriteriaVariances = new List<CriterionVarianceDto>()
+                };
+
+                var scoresForSub = allScoresInRound.Where(s => s.SubmissionId == sub.Id).ToList();
+
+                foreach (var critId in round.CriteriaIds)
+                {
+                    var critName = criteriaDict.TryGetValue(critId, out var name) ? name : "Criterion " + critId;
+                    var critScores = scoresForSub.Where(s => s.CriterionId == critId).Select(s => s.ScoreValue).ToList();
+
+                    if (critScores.Count == 0)
+                    {
+                        subVariance.CriteriaVariances.Add(new CriterionVarianceDto
+                        {
+                            CriterionId = critId,
+                            CriterionName = critName,
+                            MeanScore = 0,
+                            Variance = 0,
+                            StandardDeviation = 0,
+                            TotalJudges = 0
+                        });
+                        continue;
+                    }
+
+                    double mean = critScores.Average();
+                    double sumOfSquares = critScores.Sum(s => Math.Pow(s - mean, 2));
+                    double variance = critScores.Count > 1 ? sumOfSquares / (critScores.Count - 1) : 0;
+                    double stdDev = Math.Sqrt(variance);
+
+                    subVariance.CriteriaVariances.Add(new CriterionVarianceDto
                     {
                         CriterionId = critId,
                         CriterionName = critName,
-                        MeanScore = 0,
-                        Variance = 0,
-                        StandardDeviation = 0,
-                        TotalJudges = 0
+                        MeanScore = Math.Round(mean, 2),
+                        Variance = Math.Round(variance, 2),
+                        StandardDeviation = Math.Round(stdDev, 2),
+                        TotalJudges = critScores.Count
                     });
-                    continue;
                 }
 
-                double mean = critScores.Average();
-                double sumOfSquares = critScores.Sum(s => Math.Pow(s - mean, 2));
-                double variance = critScores.Count > 1 ? sumOfSquares / (critScores.Count - 1) : 0;
-                double stdDev = Math.Sqrt(variance);
-
-                result.CriteriaVariances.Add(new CriterionVarianceDto
-                {
-                    CriterionId = critId,
-                    CriterionName = critName,
-                    MeanScore = Math.Round(mean, 2),
-                    Variance = Math.Round(variance, 2),
-                    StandardDeviation = Math.Round(stdDev, 2),
-                    TotalJudges = critScores.Count
-                });
+                result.SubmissionsVariances.Add(subVariance);
             }
 
             return result;

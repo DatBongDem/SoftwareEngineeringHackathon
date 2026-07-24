@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "ApprovedUser")]
     public class ScoringController : ControllerBase
     {
         private readonly IScoringService _scoringService;

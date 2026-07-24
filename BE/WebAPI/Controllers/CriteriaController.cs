@@ -8,6 +8,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "ApprovedUser")]
     public class CriteriaController : ControllerBase
     {
         private readonly IEventService _eventService;
@@ -46,6 +47,14 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetEventCriteria(string eventId)
         {
             var criteriaList = await _eventService.GetCriteriaByEventIdAsync(eventId);
+            return Ok(criteriaList);
+        }
+
+        [HttpPost("/api/events/{eventId}/criteria/inherit")]
+        [Authorize(Policy = "ApprovedUser", Roles = "Coordinator")]
+        public async Task<IActionResult> InheritCriteria(string eventId)
+        {
+            var criteriaList = await _eventService.InheritCriteriaTemplatesAsync(eventId);
             return Ok(criteriaList);
         }
     }

@@ -24,5 +24,6 @@ namespace Infrastructure.Persistence
         public IMongoCollection<Score> Scores => _database.GetCollection<Score>("Scores");
         public IMongoCollection<AuditLog> AuditLogs => _database.GetCollection<AuditLog>("AuditLogs");
         public IMongoCollection<Prize> Prizes => _database.GetCollection<Prize>("Prizes");
+        public IMongoCollection<Notification> Notifications => _database.GetCollection<Notification>("Notifications");
     }
 }

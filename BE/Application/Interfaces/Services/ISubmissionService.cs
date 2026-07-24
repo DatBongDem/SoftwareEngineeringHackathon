@@ -13,5 +13,6 @@ namespace Application.Interfaces.Services
         Task<List<Submission>> GetSubmissionsByEventIdAsync(string eventId);
         Task<bool> DisqualifySubmissionAsync(string submissionId, string reason);
         Task<bool> SyncGithubMetadataAsync(string submissionId);
+        Task<bool> SetCalibrationStatusAsync(string submissionId, bool isCalibration);
     }
 }

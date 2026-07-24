@@ -17,17 +17,20 @@ namespace Application.Services
         private readonly IJwtService _jwtService;
         private readonly IGoogleAuthService _googleAuthService;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly INotificationRepository _notificationRepository;
 
         public AuthService(
             IUserRepository userRepository,
             IJwtService jwtService,
             IGoogleAuthService googleAuthService,
-            IPasswordHasher passwordHasher)
+            IPasswordHasher passwordHasher,
+            INotificationRepository notificationRepository)
         {
             _userRepository = userRepository;
             _jwtService = jwtService;
             _googleAuthService = googleAuthService;
             _passwordHasher = passwordHasher;
+            _notificationRepository = notificationRepository;
         }
 
         public async Task<AuthResponseDto> GoogleLoginAsync(GoogleLoginDto dto)
@@ -125,6 +128,16 @@ namespace Application.Services
 
             user.IsApproved = true;
             await _userRepository.UpdateAsync(user);
+
+            await _notificationRepository.CreateAsync(new Notification
+            {
+                UserId = userId,
+                Message = "Tài khoản của bạn đã được Ban tổ chức phê duyệt thành công!",
+                Type = "System",
+                IsRead = false,
+                CreatedAt = DateTime.UtcNow
+            });
+
             return true;
         }
 

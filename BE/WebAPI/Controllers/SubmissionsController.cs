@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "ApprovedUser")]
     public class SubmissionsController : ControllerBase
     {
         private readonly ISubmissionService _submissionService;
@@ -74,6 +74,15 @@ namespace WebAPI.Controllers
             var success = await _submissionService.SyncGithubMetadataAsync(id);
             if (!success) return BadRequest(new { message = "Failed to sync GitHub metadata. Verify repo URL." });
             return Ok(new { message = "GitHub metadata synced successfully." });
+        }
+
+        [HttpPut("{id}/calibration")]
+        [Authorize(Policy = "ApprovedUser", Roles = "Coordinator")]
+        public async Task<IActionResult> SetCalibrationStatus(string id, [FromQuery] bool isCalibration)
+        {
+            var success = await _submissionService.SetCalibrationStatusAsync(id, isCalibration);
+            if (!success) return NotFound(new { message = "Submission not found." });
+            return Ok(new { message = $"Submission calibration status updated to {isCalibration} successfully." });
         }
     }
 }
