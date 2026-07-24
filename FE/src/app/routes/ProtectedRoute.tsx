@@ -10,5 +10,13 @@ export function ProtectedRoute() {
 
   if (!user) return <Navigate to="/login" state={{ from: location }} replace />
 
+  if (!user.isApproved && location.pathname !== '/pending-approval') {
+    return <Navigate to="/pending-approval" replace />
+  }
+
+  if (user.isApproved && location.pathname === '/pending-approval') {
+    return <Navigate to="/" replace />
+  }
+
   return <Outlet />
 }

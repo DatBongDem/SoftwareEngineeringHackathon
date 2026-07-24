@@ -30,7 +30,13 @@ export interface CriterionVariance {
   totalJudges: number
 }
 
+export interface CalibrationSubmissionVariance {
+  submissionId: string
+  teamName: string
+  criteriaVariances: CriterionVariance[]
+}
+
 export interface CalibrationResult {
   roundId: string
-  criteriaVariances: CriterionVariance[]
+  submissionsVariances: CalibrationSubmissionVariance[]
 }

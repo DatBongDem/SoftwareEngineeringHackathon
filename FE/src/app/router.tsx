@@ -3,6 +3,7 @@ import { ProtectedRoute } from './routes/ProtectedRoute'
 import { RoleRoute } from './routes/RoleRoute'
 import { MainLayout } from './layouts/MainLayout'
 import { AuthLayout } from './layouts/AuthLayout'
+import { PendingApprovalPage } from './pages/PendingApprovalPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ForbiddenPage } from './pages/ForbiddenPage'
@@ -22,16 +23,19 @@ import { RoundJudgingPage } from '@/features/judging/pages/RoundJudgingPage'
 import { CalibrationDashboardPage } from '@/features/judging/pages/CalibrationDashboardPage'
 import { RoundRankingPage } from '@/features/ranking/pages/RoundRankingPage'
 import { CriteriaTemplatesPage } from '@/features/criteria/pages/CriteriaTemplatesPage'
+import { NotificationsPage } from '@/features/notifications/pages/NotificationsPage'
 
 export const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
+      { path: 'pending-approval', element: <PendingApprovalPage /> },
       {
         element: <MainLayout />,
         children: [
           { index: true, element: <DashboardPage /> },
           { path: 'profile', element: <ProfilePage /> },
+          { path: 'notifications', element: <NotificationsPage /> },
           { path: 'events', element: <EventsListPage /> },
           { path: 'events/:eventId', element: <EventDetailPage /> },
           { path: 'tracks/:trackId', element: <TrackDetailPage /> },

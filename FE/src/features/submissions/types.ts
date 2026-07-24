@@ -17,6 +17,7 @@ export interface Submission {
   notes: string | null
   isDisqualified: boolean
   disqualificationReason: string | null
+  isCalibration: boolean
   githubMetadata: GithubRepoMetadata | null
   submittedAt: string
 }

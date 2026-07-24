@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AlertTriangle, ArrowLeft, ExternalLink, FileText, MonitorPlay, ShieldX } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, ExternalLink, FileText, Gauge, MonitorPlay, ShieldX } from 'lucide-react'
 import { useAuth } from '@/features/auth/context/AuthContext'
 import { useSubmission } from '../hooks/useSubmission'
 import { useTeam } from '@/features/teams/hooks/useTeam'
 import { useRounds } from '@/features/events/hooks/useRounds'
+import { useSetCalibrationStatus } from '../hooks/useSetCalibrationStatus'
 import { GithubMetadataCard } from '../components/GithubMetadataCard'
 import { SyncGithubButton } from '../components/SyncGithubButton'
 import { DisqualifyModal } from '../components/DisqualifyModal'
@@ -18,6 +19,7 @@ export function SubmissionDetailPage() {
   const { data: team } = useTeam(submission?.teamId)
   const { data: rounds } = useRounds(submission?.eventId)
   const [disqualifyOpen, setDisqualifyOpen] = useState(false)
+  const setCalibration = useSetCalibrationStatus(submissionId ?? '')
 
   if (isLoading) return <Spinner />
   if (error) return <Alert tone="danger">{getErrorMessage(error)}</Alert>
@@ -40,7 +42,12 @@ export function SubmissionDetailPage() {
           title={team?.teamName ?? 'Submission'}
           description={round ? `Round ${round.roundNumber} — ${round.name}` : undefined}
           action={
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap justify-end">
+              {submission.isCalibration && (
+                <Badge tone="info" dot>
+                  Bài thi mẫu
+                </Badge>
+              )}
               {submission.isDisqualified ? (
                 <Badge tone="danger" dot>
                   Disqualified
@@ -51,16 +58,29 @@ export function SubmissionDetailPage() {
                 </Badge>
               )}
               {isCoordinator && !submission.isDisqualified && (
-                <Button variant="danger" size="sm" onClick={() => setDisqualifyOpen(true)}>
-                  <ShieldX className="h-3.5 w-3.5" />
-                  Disqualify
-                </Button>
+                <>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    loading={setCalibration.isPending}
+                    onClick={() => setCalibration.mutate(!submission.isCalibration)}
+                  >
+                    <Gauge className="h-3.5 w-3.5 text-indigo-500" />
+                    {submission.isCalibration ? 'Bỏ bài mẫu' : 'Đánh dấu bài mẫu'}
+                  </Button>
+                  <Button variant="danger" size="sm" onClick={() => setDisqualifyOpen(true)}>
+                    <ShieldX className="h-3.5 w-3.5" />
+                    Disqualify
+                  </Button>
+                </>
               )}
               {isLeader && <SyncGithubButton submissionId={submission.id} />}
             </div>
           }
         />
       </div>
+
+      {setCalibration.isError && <Alert tone="danger">{getErrorMessage(setCalibration.error)}</Alert>}
 
       {submission.isDisqualified && (
         <Alert tone="danger">

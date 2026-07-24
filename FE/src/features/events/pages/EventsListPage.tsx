@@ -64,16 +64,19 @@ export function EventsListPage() {
                     </Badge>
                   </div>
                   <div>
-                    <h2 className="font-display font-medium text-slate-900 dark:text-slate-100">
+                    <h2 className="font-display font-semibold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                       {event.title}
                     </h2>
-                    <p className="mt-1 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">
+                    <p className="mt-1.5 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">
                       {event.description}
                     </p>
                   </div>
-                  <p className="mt-auto text-xs font-medium text-slate-500">
-                    {event.term} {event.academicYear}
-                  </p>
+                  <div className="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs font-medium text-slate-500">
+                    <span>{event.term} {event.academicYear}</span>
+                    <span className="text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-0.5">
+                      Explore &rarr;
+                    </span>
+                  </div>
                 </Card>
               </Link>
             </Reveal>

@@ -75,8 +75,12 @@ export function AuthLayout() {
         <p className="relative text-xs text-indigo-200">© {new Date().getFullYear()} SEAL — FPT University HCMC</p>
       </div>
 
-      <div className="relative flex w-full flex-col lg:w-1/2">
-        <div className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(circle_at_85%_0%,rgba(79,70,229,0.1),transparent_45%),radial-gradient(circle_at_0%_100%,rgba(245,158,11,0.1),transparent_45%)] lg:block dark:bg-[radial-gradient(circle_at_85%_0%,rgba(99,102,241,0.18),transparent_45%),radial-gradient(circle_at_0%_100%,rgba(245,158,11,0.1),transparent_45%)]" />
+      <div className="relative flex w-full flex-col lg:w-1/2 overflow-hidden">
+        {/* Animated Background Glowing Blobs */}
+        <div className="pointer-events-none absolute inset-0 select-none">
+          <div className="absolute -top-12 -left-12 h-96 w-96 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl animate-pulse-slow" style={{ animationDelay: '0s' }} />
+          <div className="absolute -bottom-12 -right-12 h-96 w-96 rounded-full bg-amber-500/5 dark:bg-amber-500/10 blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }} />
+        </div>
 
         <div className="relative flex justify-end px-4 pt-4 sm:px-6 lg:pt-6">
           <ThemeToggle />

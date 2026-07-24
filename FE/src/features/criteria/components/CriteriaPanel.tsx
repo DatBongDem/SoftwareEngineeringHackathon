@@ -3,6 +3,7 @@ import { ListChecks, Plus } from 'lucide-react'
 import { useAuth } from '@/features/auth/context/AuthContext'
 import { useEventCriteria } from '../hooks/useEventCriteria'
 import { useCreateCriteria } from '../hooks/useCreateCriteria'
+import { useInheritCriteria } from '../hooks/useInheritCriteria'
 import { Alert, Badge, Button, Card, EmptyState, Input, Skeleton, Textarea } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
@@ -12,6 +13,7 @@ export function CriteriaPanel({ eventId }: { eventId: string }) {
 
   const { data: criteria, isLoading, error } = useEventCriteria(eventId)
   const createCriteria = useCreateCriteria(eventId)
+  const inheritCriteria = useInheritCriteria(eventId)
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -37,6 +39,26 @@ export function CriteriaPanel({ eventId }: { eventId: string }) {
 
   return (
     <div className="flex flex-col gap-4 pt-4">
+      {isCoordinator && criteria && criteria.length === 0 && (
+        <Card className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-dashed p-4">
+          <div>
+            <p className="font-medium text-slate-900 dark:text-slate-100">Kế thừa tiêu chí cuộc thi</p>
+            <p className="text-xs text-slate-500">Tự động sao chép các tiêu chí mặc định (Sáng tạo, Code Quality, UI/UX, Slide) vào sự kiện này.</p>
+          </div>
+          <Button
+            variant="primary"
+            size="sm"
+            loading={inheritCriteria.isPending}
+            onClick={() => inheritCriteria.mutate()}
+          >
+            <ListChecks className="h-3.5 w-3.5" />
+            Nhập tiêu chí mẫu
+          </Button>
+        </Card>
+      )}
+
+      {inheritCriteria.isError && <Alert tone="danger">{getErrorMessage(inheritCriteria.error)}</Alert>}
+
       {isLoading && (
         <div className="flex flex-col gap-2">
           {Array.from({ length: 3 }).map((_, i) => (
@@ -51,8 +73,8 @@ export function CriteriaPanel({ eventId }: { eventId: string }) {
         </div>
       )}
 
-      {criteria && criteria.length === 0 && (
-        <EmptyState icon={ListChecks} message="This event has no scoring criteria yet." />
+      {criteria && criteria.length === 0 && !isLoading && (
+        <EmptyState icon={ListChecks} message="Sự kiện này chưa được cấu hình tiêu chí chấm điểm." />
       )}
 
       {criteria && criteria.length > 0 && (

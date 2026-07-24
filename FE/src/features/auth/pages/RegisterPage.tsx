@@ -48,7 +48,7 @@ export function RegisterPage() {
   }
 
   return (
-    <Card className="sm:p-8">
+    <Card className="sm:p-8 bg-white/70 border-slate-200/60 dark:bg-slate-900/60 backdrop-blur-md dark:border-slate-800/60 shadow-xl shadow-slate-200/30 dark:shadow-slate-950/40">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
           <h2 className="font-display text-xl font-semibold text-slate-900 dark:text-slate-100">

@@ -11,6 +11,11 @@ export async function createEventCriteria(eventId: string, payload: CreateCriter
   return data
 }
 
+export async function inheritCriteria(eventId: string): Promise<Criteria[]> {
+  const { data } = await apiClient.post<Criteria[]>(`/events/${eventId}/criteria/inherit`)
+  return data
+}
+
 export async function getDefaultTemplates(): Promise<Criteria[]> {
   const { data } = await apiClient.get<Criteria[]>('/criteria/templates')
   return data

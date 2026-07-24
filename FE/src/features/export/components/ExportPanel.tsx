@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useRounds } from '@/features/events/hooks/useRounds'
 import { ExportRankingsCsvButton } from './ExportRankingsCsvButton'
 import { ExportRblDatasetCsvButton } from './ExportRblDatasetCsvButton'
+import { ExportFinalRankingsCsvButton } from './ExportFinalRankingsCsvButton'
 import { Card, EmptyState, Reveal, Skeleton, buttonClassName } from '@/shared/components'
 
 export function ExportPanel({ eventId }: { eventId: string }) {
@@ -10,6 +11,21 @@ export function ExportPanel({ eventId }: { eventId: string }) {
 
   return (
     <div className="flex flex-col gap-6 pt-4">
+      <Card className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-start gap-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-655 dark:bg-emerald-900/40 dark:text-emerald-300">
+            <FileSpreadsheet className="h-5 w-5" />
+          </span>
+          <div>
+            <p className="font-medium text-slate-900 dark:text-slate-100">Overall event standings</p>
+            <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
+              Xuất bảng xếp hạng chung cuộc của toàn bộ sự kiện ra file CSV tải về (bao gồm tổng điểm tích lũy và danh sách đội thi).
+            </p>
+          </div>
+        </div>
+        <ExportFinalRankingsCsvButton eventId={eventId} />
+      </Card>
+
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-300">

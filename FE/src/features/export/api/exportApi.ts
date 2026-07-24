@@ -15,3 +15,10 @@ export async function exportRblDatasetCsv(eventId: string): Promise<Blob> {
   })
   return data
 }
+
+export async function exportFinalRankingsCsv(eventId: string): Promise<Blob> {
+  const { data } = await apiClient.get(`/export/events/${eventId}/final-rankings/csv`, {
+    responseType: 'blob',
+  })
+  return data
+}

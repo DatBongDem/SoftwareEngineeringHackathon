@@ -32,3 +32,12 @@ export async function disqualifySubmission(
 ): Promise<void> {
   await apiClient.post(`/submissions/${submissionId}/disqualify`, payload)
 }
+
+export async function setCalibrationStatus(
+  submissionId: string,
+  isCalibration: boolean,
+): Promise<void> {
+  await apiClient.put(`/submissions/${submissionId}/calibration`, null, {
+    params: { isCalibration },
+  })
+}

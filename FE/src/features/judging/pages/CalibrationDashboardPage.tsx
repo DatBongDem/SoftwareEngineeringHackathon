@@ -3,7 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useRounds } from '@/features/events/hooks/useRounds'
 import { useCalibrationVariance } from '../hooks/useCalibrationVariance'
 import { VarianceTable } from '../components/VarianceTable'
-import { Alert, EmptyState, MissingEventContextAlert, PageHeader, TableSkeleton } from '@/shared/components'
+import { Alert, Badge, Card, EmptyState, MissingEventContextAlert, PageHeader, TableSkeleton } from '@/shared/components'
 import { getErrorMessage } from '@/shared/lib/getErrorMessage'
 
 export function CalibrationDashboardPage() {
@@ -40,13 +40,21 @@ export function CalibrationDashboardPage() {
       {error && <Alert tone="danger">{getErrorMessage(error)}</Alert>}
       {isLoading && <TableSkeleton columns={6} rows={4} />}
 
-      {!isLoading && calibration && calibration.criteriaVariances.length === 0 && (
-        <EmptyState icon={Gauge} message="No criteria to calibrate for this round yet." />
+      {!isLoading && calibration && calibration.submissionsVariances.length === 0 && (
+        <EmptyState icon={Gauge} message="Chưa có bài thi mẫu nào được đánh dấu hiệu chuẩn cho vòng này." />
       )}
 
-      {calibration && calibration.criteriaVariances.length > 0 && (
-        <VarianceTable data={calibration.criteriaVariances} />
-      )}
+      {calibration && calibration.submissionsVariances.map((subVar) => (
+        <Card key={subVar.submissionId} className="flex flex-col gap-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3 dark:border-slate-800/60">
+            <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-sm">
+              Bài thi mẫu: {subVar.teamName}
+            </h3>
+            <Badge tone="neutral">ID: {subVar.submissionId}</Badge>
+          </div>
+          <VarianceTable data={subVar.criteriaVariances} />
+        </Card>
+      ))}
     </div>
   )
 }

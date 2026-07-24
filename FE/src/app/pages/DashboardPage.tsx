@@ -43,15 +43,18 @@ export function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="relative overflow-hidden rounded-xl bg-linear-to-br from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-sm sm:p-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(255,255,255,0.15),transparent_45%)]" />
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-r from-indigo-600 via-violet-750 to-indigo-950 p-6 text-white shadow-lg sm:p-8 border border-white/10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(255,255,255,0.12),transparent_50%)]" />
         <div className="relative flex flex-col gap-3">
-          <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+          <span className="w-fit rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-indigo-200">
+            System Dashboard
+          </span>
+          <h1 className="font-display text-2xl font-extrabold tracking-tight md:text-3xl drop-shadow-sm">
             Welcome back, {user?.fullName?.split(' ').pop()}
           </h1>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 pt-1">
             {user?.roles.map((role) => (
-              <Badge key={role} tone="info" className="bg-white/15 text-white ring-white/20">
+              <Badge key={role} tone="info" className="bg-white/15 text-white ring-1 ring-white/20 px-3 py-1 font-semibold">
                 {role}
               </Badge>
             ))}
@@ -110,10 +113,9 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <Card className="text-sm text-slate-600 dark:text-slate-300">
-        Team, Submission, Judging, Ranking, and Prize modules will appear here as they're built. See{' '}
-        <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs dark:bg-slate-800">docs/frontend-plan.md</code>{' '}
-        for progress.
+      <Card className="bg-white/60 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/50 p-4 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
+        <span>SEAL Software Engineering Agile League · FPT University HCMC</span>
+        <span className="font-medium text-indigo-500 hover:underline cursor-pointer">v1.2.0 (Stable)</span>
       </Card>
     </div>
   )
