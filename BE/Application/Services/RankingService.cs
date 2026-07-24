@@ -17,19 +17,22 @@ namespace Application.Services
         private readonly IScoreRepository _scoreRepository;
         private readonly ITeamRepository _teamRepository;
         private readonly IPrizeRepository _prizeRepository;
+        private readonly INotificationRepository _notificationRepository;
 
         public RankingService(
             IEventRepository eventRepository,
             ISubmissionRepository submissionRepository,
             IScoreRepository scoreRepository,
             ITeamRepository teamRepository,
-            IPrizeRepository prizeRepository)
+            IPrizeRepository prizeRepository,
+            INotificationRepository notificationRepository)
         {
             _eventRepository = eventRepository;
             _submissionRepository = submissionRepository;
             _scoreRepository = scoreRepository;
             _teamRepository = teamRepository;
             _prizeRepository = prizeRepository;
+            _notificationRepository = notificationRepository;
         }
 
         // Shared per-criterion-weighted-average scoring used by round, track,
@@ -247,6 +250,44 @@ namespace Application.Services
             };
 
             await _prizeRepository.CreateAsync(prize);
+
+            // Send Notification to Team members
+            try
+            {
+                var team = await _teamRepository.GetByIdAsync(dto.TeamId);
+                if (team != null)
+                {
+                    var msg = $"Chúc mừng! Đội {team.TeamName} của bạn đã được trao giải thưởng: {dto.Name} ({dto.Reward})!";
+                    await _notificationRepository.CreateAsync(new Notification
+                    {
+                        UserId = team.LeaderUserId,
+                        Message = msg,
+                        Type = "Prize",
+                        IsRead = false,
+                        CreatedAt = DateTime.UtcNow
+                    });
+
+                    foreach (var member in team.Members)
+                    {
+                        if (member.IsAccepted && member.UserId != team.LeaderUserId)
+                        {
+                            await _notificationRepository.CreateAsync(new Notification
+                            {
+                                UserId = member.UserId,
+                                Message = msg,
+                                Type = "Prize",
+                                IsRead = false,
+                                CreatedAt = DateTime.UtcNow
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Silence notification errors
+            }
+
             return prize;
         }
 

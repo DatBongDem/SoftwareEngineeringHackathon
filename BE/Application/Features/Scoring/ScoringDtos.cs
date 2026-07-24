@@ -26,9 +26,16 @@ namespace Application.Features.Scoring
         public int TotalJudges { get; set; }
     }
 
+    public class CalibrationSubmissionVarianceDto
+    {
+        public string SubmissionId { get; set; } = default!;
+        public string TeamName { get; set; } = default!;
+        public List<CriterionVarianceDto> CriteriaVariances { get; set; } = new();
+    }
+
     public class CalibrationResultDto
     {
         public string RoundId { get; set; } = default!;
-        public List<CriterionVarianceDto> CriteriaVariances { get; set; } = new();
+        public List<CalibrationSubmissionVarianceDto> SubmissionsVariances { get; set; } = new();
     }
 }

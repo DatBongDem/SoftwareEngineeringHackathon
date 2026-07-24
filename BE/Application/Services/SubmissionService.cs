@@ -41,6 +41,14 @@ namespace Application.Services
                 throw new Exception("Round not found.");
             }
 
+            if (round.RoundNumber > 1)
+            {
+                if (team.Status != Domain.Enums.TeamStatus.Promoted)
+                {
+                    throw new Exception("Your team has not been promoted to this round and cannot submit projects.");
+                }
+            }
+
             if (DateTime.UtcNow > round.SubmissionDeadline)
             {
                 throw new Exception("Submission deadline has passed.");
@@ -52,11 +60,17 @@ namespace Application.Services
             var existingSubmission = await _submissionRepository.GetTeamSubmissionInRoundAsync(dto.TeamId, dto.RoundId);
             if (existingSubmission != null)
             {
+                if (existingSubmission.IsDisqualified)
+                {
+                    throw new Exception("This submission has been disqualified and cannot be updated.");
+                }
+
                 // Update existing submission
                 existingSubmission.RepoUrl = dto.RepoUrl;
                 existingSubmission.DemoUrl = dto.DemoUrl;
                 existingSubmission.ReportUrl = dto.ReportUrl;
                 existingSubmission.Notes = dto.Notes;
+                existingSubmission.IsCalibration = dto.IsCalibration;
                 existingSubmission.GithubMetadata = metadata;
                 existingSubmission.SubmittedAt = DateTime.UtcNow;
 
@@ -73,6 +87,7 @@ namespace Application.Services
                 DemoUrl = dto.DemoUrl,
                 ReportUrl = dto.ReportUrl,
                 Notes = dto.Notes,
+                IsCalibration = dto.IsCalibration,
                 GithubMetadata = metadata,
                 SubmittedAt = DateTime.UtcNow
             };
@@ -116,6 +131,16 @@ namespace Application.Services
             if (metadata == null) return false;
 
             submission.GithubMetadata = metadata;
+            await _submissionRepository.UpdateAsync(submission);
+            return true;
+        }
+
+        public async Task<bool> SetCalibrationStatusAsync(string submissionId, bool isCalibration)
+        {
+            var submission = await _submissionRepository.GetByIdAsync(submissionId);
+            if (submission == null) return false;
+
+            submission.IsCalibration = isCalibration;
             await _submissionRepository.UpdateAsync(submission);
             return true;
         }

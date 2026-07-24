@@ -22,5 +22,6 @@ namespace Application.Interfaces.Services
         Task<Criteria> CreateCriteriaAsync(string? eventId, CreateCriteriaDto dto);
         Task<List<Criteria>> GetCriteriaByEventIdAsync(string eventId);
         Task<List<Criteria>> GetDefaultCriteriaTemplatesAsync();
+        Task<List<Criteria>> InheritCriteriaTemplatesAsync(string eventId);
     }
 }

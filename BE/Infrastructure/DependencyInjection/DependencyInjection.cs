@@ -32,6 +32,7 @@ namespace Infrastructure.DependencyInjection
             services.AddScoped<IScoreRepository, ScoreRepository>();
             services.AddScoped<IAuditLogRepository, AuditLogRepository>();
             services.AddScoped<IPrizeRepository, PrizeRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
             
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IJwtService, JwtService>();

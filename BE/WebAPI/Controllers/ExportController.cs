@@ -7,6 +7,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "ApprovedUser")]
     [Authorize(Roles = "Coordinator")]
     public class ExportController : ControllerBase
     {
@@ -33,6 +34,14 @@ namespace WebAPI.Controllers
             var dataset = await _rankingService.GetAnonymizedRblDatasetAsync(eventId);
             var fileBytes = _csvExportService.ExportAnonymizedRblDatasetToCsv(dataset);
             return File(fileBytes, "text/csv", $"anonymized_rbl_dataset_event_{eventId}.csv");
+        }
+
+        [HttpGet("events/{eventId}/final-rankings/csv")]
+        public async Task<IActionResult> ExportFinalRankingsCsv(string eventId)
+        {
+            var rankings = await _rankingService.CalculateEventRankingAsync(eventId);
+            var fileBytes = _csvExportService.ExportRankingsToCsv(rankings);
+            return File(fileBytes, "text/csv", $"final_rankings_event_{eventId}.csv");
         }
     }
 }

@@ -44,7 +44,12 @@ namespace WebAPI
                 };
             });
 
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApprovedUser", policy =>
+                    policy.RequireAuthenticatedUser()
+                          .RequireClaim("IsApproved", "True"));
+            });
             builder.Services.AddControllers();
 
             // Configure CORS for the frontend dev server / deployed origin(s)

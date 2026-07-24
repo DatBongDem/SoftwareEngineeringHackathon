@@ -4,6 +4,7 @@ using Application.Interfaces.Services;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -131,6 +132,49 @@ namespace Application.Services
         public async Task<List<Criteria>> GetDefaultCriteriaTemplatesAsync()
         {
             return await _eventRepository.GetDefaultCriteriaTemplatesAsync();
+        }
+
+        public async Task<List<Criteria>> InheritCriteriaTemplatesAsync(string eventId)
+        {
+            var templates = await _eventRepository.GetDefaultCriteriaTemplatesAsync();
+            if (templates == null || templates.Count == 0)
+            {
+                templates = new List<Criteria>
+                {
+                    new Criteria { Name = "Tính Sáng Tạo & Đột Phá", Description = "Đánh giá mức độ đột phá và độc đáo của dự án", Weight = 1.0, MaxScore = 100, IsDefaultTemplate = true },
+                    new Criteria { Name = "Kiến Trúc & Chất Lượng Mã Nguồn", Description = "Kiến trúc mã nguồn clean code và công nghệ áp dụng", Weight = 1.5, MaxScore = 100, IsDefaultTemplate = true },
+                    new Criteria { Name = "Trải Nghiệm UI/UX & Demo", Description = "Giao diện thân thiện và demo chạy ổn định", Weight = 1.0, MaxScore = 100, IsDefaultTemplate = true },
+                    new Criteria { Name = "Khả Năng Thuyết Trình & Slide", Description = "Slide chuyên nghiệp và thuyết trình thuyết phục", Weight = 0.5, MaxScore = 100, IsDefaultTemplate = true }
+                };
+                foreach (var t in templates)
+                {
+                    await _eventRepository.CreateCriteriaAsync(t);
+                }
+            }
+
+            var existingCriteria = await _eventRepository.GetCriteriaByEventIdAsync(eventId);
+            var existingNames = new HashSet<string>(existingCriteria.Select(c => c.Name), StringComparer.OrdinalIgnoreCase);
+
+            var clonedList = new List<Criteria>();
+            foreach (var t in templates)
+            {
+                if (!existingNames.Contains(t.Name))
+                {
+                    var cloned = new Criteria
+                    {
+                        EventId = eventId,
+                        Name = t.Name,
+                        Description = t.Description,
+                        Weight = t.Weight,
+                        MaxScore = t.MaxScore,
+                        IsDefaultTemplate = false
+                    };
+                    await _eventRepository.CreateCriteriaAsync(cloned);
+                    clonedList.Add(cloned);
+                }
+            }
+
+            return await _eventRepository.GetCriteriaByEventIdAsync(eventId);
         }
     }
 }

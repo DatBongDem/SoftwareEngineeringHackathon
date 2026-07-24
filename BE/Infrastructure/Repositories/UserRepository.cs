@@ -45,5 +45,10 @@ namespace Infrastructure.Repositories
         {
             await _context.Users.ReplaceOneAsync(u => u.Id == user.Id, user);
         }
+
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await _context.Users.Find(_ => true).ToListAsync();
+        }
     }
 }

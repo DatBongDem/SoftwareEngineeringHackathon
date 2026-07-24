@@ -35,6 +35,8 @@ namespace Domain.Entities
 
         public bool IsDisqualified { get; set; }
 
+        public bool IsCalibration { get; set; }
+
         public string? DisqualificationReason { get; set; }
 
         public GithubRepoMetadata? GithubMetadata { get; set; }

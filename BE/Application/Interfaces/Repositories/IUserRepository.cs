@@ -12,5 +12,6 @@ namespace Application.Interfaces.Repositories
         Task<List<User>> GetPendingUsersAsync();
         Task CreateAsync(User user);
         Task UpdateAsync(User user);
+        Task<List<User>> GetAllUsersAsync();
     }
 }

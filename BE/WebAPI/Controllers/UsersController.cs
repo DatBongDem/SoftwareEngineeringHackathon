@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("pending")]
-        [Authorize(Roles = "Coordinator")]
+        [Authorize(Policy = "ApprovedUser", Roles = "Coordinator")]
         public async Task<IActionResult> GetPendingUsers()
         {
             var pending = await _authService.GetPendingUsersAsync();
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}/approve")]
-        [Authorize(Roles = "Coordinator")]
+        [Authorize(Policy = "ApprovedUser", Roles = "Coordinator")]
         public async Task<IActionResult> ApproveUser(string id)
         {
             var result = await _authService.ApproveUserAsync(id);
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("guest-judge")]
-        [Authorize(Roles = "Coordinator")]
+        [Authorize(Policy = "ApprovedUser", Roles = "Coordinator")]
         public async Task<IActionResult> CreateGuestJudge([FromBody] CreateGuestJudgeDto dto)
         {
             try
